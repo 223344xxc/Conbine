@@ -9,7 +9,9 @@ public enum MapSellType
 
 public class MapSell : MonoBehaviour
 {
-    [SerializeField] private IndexVector indexVector;
+    private IndexVector indexVector;
+    private bool isSquareOn = false;
+    private SquareCtrl onSquare;
 
     private void Awake()
     {
@@ -35,5 +37,15 @@ public class MapSell : MonoBehaviour
     {
         indexVector.Set(x, y);
     }
-   
+
+    //자신 위에 있는 상자를 수정
+    public void SetOnSquare(bool isOn, SquareCtrl square = null)
+    {
+        isSquareOn = isOn;
+        onSquare = square;
+
+        onSquare.transform.position = transform.position - new Vector3(0, 0, transform.position.z);
+
+        square.SetMapIndex(indexVector);
+    }
 }
