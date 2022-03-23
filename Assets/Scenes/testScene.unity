@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1587a07f3e5aec3469b1cb3efcc1e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 10, y: 10}
+  size: {x: 5, y: 5}
   sellSize: 4.5
   sellPrefab: {fileID: 37902466016789755, guid: b67911d81cc938b42964a81f88898eaf, type: 3}
 --- !u!1 &743645522

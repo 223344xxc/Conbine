@@ -53,6 +53,11 @@ public class MapMgr : MonoBehaviour
         map[y][x].SetOnSquare(isOn, square);
     }
 
+    public MapSell[][] GetMap()
+    {
+        return map;
+    }
+
     //입력한 값에 위치한 셀을 반환합니다
     public MapSell GetMapElement(IndexVector iv)
     {
@@ -76,7 +81,7 @@ public class MapMgr : MonoBehaviour
     public MapSell FindFinalSell(MoveDirection dir, IndexVector iv)
     {
         IndexVector nextIv = iv + IndexVector.GetMoveDirectionToIndexVector(dir);
-        if (GetMapElement(nextIv) != null)
+        if (GetMapElement(nextIv) != null && GetMapElement(nextIv).CanMoveThere())
         {
             return FindFinalSell(dir, nextIv);
         }
