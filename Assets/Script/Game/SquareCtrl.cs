@@ -33,6 +33,7 @@ public class SquareCtrl : MonoBehaviour
         SquareMoveUpdate();
     }
 
+    //상자의 움직임 업데이트 입니다
     private void SquareMoveUpdate()
     {
         if (isTrakingTarget)
@@ -81,11 +82,17 @@ public class SquareCtrl : MonoBehaviour
         return mapIndex;
     }
 
+    //상자의 목표 위치를 수정하고 움직입니다
     public void MoveToPosition(Vector3 pos)
     {
         isTrakingTarget = true;
         moveTarget = pos;
     }
+    public bool CanMove()
+    {
+        return !isTrakingTarget;
+    }
+
 
     //상자가 움직이는 방향에 맞춰 각도를 설정합니다
     public void SetSquareMoveAngle(MoveDirection dir)
@@ -109,5 +116,11 @@ public class SquareCtrl : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    //상자를 삭제합니다
+    public void RemoveSquare()
+    {
+        Destroy(gameObject);
     }
 }

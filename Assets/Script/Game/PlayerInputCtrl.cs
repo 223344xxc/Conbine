@@ -13,23 +13,23 @@ public class PlayerInputCtrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SquareMgr.instance.SummonSquare(0, 0);
+            SquareMgr.instance.SummonSquare(3, 0);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            SquareMgr.instance.SqaureMove(MoveDirection.Right);
+            SquareMgr.instance.WorldSqaureMove(MoveDirection.Right);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SquareMgr.instance.SqaureMove(MoveDirection.Down);
+            SquareMgr.instance.WorldSqaureMove(MoveDirection.Down);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SquareMgr.instance.SqaureMove(MoveDirection.Left);
+            SquareMgr.instance.WorldSqaureMove(MoveDirection.Left);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            SquareMgr.instance.SqaureMove(MoveDirection.Up);
+            SquareMgr.instance.WorldSqaureMove(MoveDirection.Up);
         }
     }
 }

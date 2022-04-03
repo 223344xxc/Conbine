@@ -15,7 +15,7 @@ public class MapSell : MonoBehaviour
     private bool isSquareOn = false;
     private SquareCtrl onSquare;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         InitMapSell();
     }
@@ -52,6 +52,8 @@ public class MapSell : MonoBehaviour
             onSquare.SetMapIndex(indexVector);
         }
     }
+
+    //자신의 위에 있는 상자를 반환합니다
     public SquareCtrl GetOnSquare()
     {
         if (isSquareOn && onSquare)
@@ -73,5 +75,14 @@ public class MapSell : MonoBehaviour
         if (mapType == MapSellType.Normal && !isSquareOn)
             return true;
         return false;
+    }
+
+    //자신과 위에있는 상자를 삭제합니다
+    public void RemoveMapSell()
+    {
+        if (onSquare)
+            onSquare.RemoveSquare();
+
+        Destroy(gameObject);
     }
 }
