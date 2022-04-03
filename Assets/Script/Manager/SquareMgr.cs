@@ -43,22 +43,32 @@ public class SquareMgr : MonoBehaviour
         mapMgr.SetOnSquare(x, y, true, sc);
     }
 
-    //리스트에 있는 상자를 모두 입력받은 방향으로 이동시킵니다
-    public void SqaureMove(MoveDirection dir)
+    //입력받은 상자를 이동시킵니다
+    public void SquareMove(MoveDirection dir, SquareCtrl square)
     {
-        //for (int i = 0; i < squareList.Count; i++)
-        //{
+        if (square)
+        {
+            MapSell ms = mapMgr.FindFinalSell(dir, square.GetMapIndex());
 
-        //    MapSell ms = mapMgr.FindFinalSell(dir, squareList[i].GetMapIndex());
+            if (ms)
+            {
+                mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
+                mapMgr.SetOnSquare(ms.GetIndexVector(), true, square);
+                square.SetSquareMoveAngle(dir);
+            }
+        }
+    }
 
-        //    if (ms)
-        //    {
-
-        //        mapMgr.GetMapElement(squareList[i].GetMapIndex()).SetOnSquare(false);
-        //        mapMgr.SetOnSquare(ms.GetIndexVector(), true, squareList[i]);
-        //        squareList[i].SetSquareMoveAngle(dir);
-        //    }
-        //}
+    //리스트에 있는 상자를 모두 입력받은 방향으로 이동시킵니다
+    public bool WorldSqaureMove(MoveDirection dir)
+    {
+        for(int i = 0; i < squareList.Count; i++)
+        {
+            if (!squareList[i].CanMove())
+            {
+                return false;
+            }
+        }
 
         MapSell[][] map = mapMgr.GetMap();
 
@@ -70,12 +80,9 @@ public class SquareMgr : MonoBehaviour
             case MoveDirection.Left:
                 for (int y = 0; y < map.Length; y++)
                 {
-                    for (int x = 0; x > map[y].Length; x++)
+                    for (int x = 0; x < map[y].Length; x++)
                     {
-                        SquareCtrl sc = mapMgr.GetMapElement(x, y).GetOnSquare();
-                        //if ()
-
-
+                        SquareMove(dir, mapMgr.GetMapElement(x, y).GetOnSquare());
                     }
                 }
                 break;
@@ -85,21 +92,34 @@ public class SquareMgr : MonoBehaviour
                 {
                     for (int x = map[y].Length - 1; x >= 0; x--)
                     {
-
+                        SquareMove(dir, mapMgr.GetMapElement(x, y).GetOnSquare());
                     }
                 }
                 break;
 
             case MoveDirection.Up:
-
+                for (int y = 0; y < map.Length; y++)
+                {
+                    for (int x = 0; x < map[y].Length; x++)
+                    {
+                        SquareMove(dir, mapMgr.GetMapElement(x, y).GetOnSquare());
+                    }
+                }
                 break;
 
             case MoveDirection.Down:
-
+                for (int y = map.Length - 1; y >= 0; y--)
+                {
+                    for (int x = 0; x < map[y].Length; x++)
+                    {
+                        SquareMove(dir, mapMgr.GetMapElement(x, y).GetOnSquare());
+                    }
+                }
                 break;
 
             default:
                 break;
         }
+        return true;
     }
 }
