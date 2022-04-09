@@ -25,6 +25,7 @@ public class MapEditorInput : MonoBehaviour
     {
         selectMapSell = new List<MapEditorSell>();
         mapSizeInputField = GameObject.Find("MapSizeInputField").GetComponent<InputField>();
+       
     }
 
     private void Update()
