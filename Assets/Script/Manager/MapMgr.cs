@@ -9,8 +9,9 @@ public class MapMgr : MonoBehaviour
     
     [SerializeField] private GameObject sellPrefab;
     private GameObject mapParent;
-    private MapSell[][] map; //맵 배열
-    private IndexVector mapSize;
+    private Map map;
+    //private MapSell[][] map; //맵 배열
+    //private IndexVector mapSize;
 
     private void Awake()
     {
@@ -21,47 +22,38 @@ public class MapMgr : MonoBehaviour
     private void InitMapMgr()
     {
         mapParent = GameObject.Find("Map");
+        map = new Map();
+        map.GetMapSize().CastIndexVector(size);
 
-        mapSize.CastIndexVector(size);
-
-        CreateMap(mapSize, sellSize);
+        CreateMap(map.GetMapSize(), sellSize);
     }
 
     //입력받은 맵 사이즈와 셀 사이즈를 기반으로 맵을 생성합니다
     public void CreateMap(IndexVector size, float sellSize)
     {
-        ResetMap();
-
         Vector2 offset;
         offset.x = (size.x / 2.0f) * sellSize - (sellSize * 0.5f);
         offset.y = (size.y / 2.0f) * sellSize - (sellSize * 0.5f);
 
-        map = new MapSell[size.y][];
+        map.InitMap(size.x, size.y);
         for (int y = 0; y < size.y; y++)
         {
-            map[y] = new MapSell[size.x];
+            map.GetMap()[y] = new MapSell[size.x];
             for (int x = 0; x < size.x; x++)
             {
-                map[y][x] = Instantiate(sellPrefab, mapParent.transform).GetComponent<MapSell>();
-                map[y][x].SetIndexVector(x, y);
-                map[y][x].transform.position = new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y, mapParent.transform.position.z);
+                map.GetMap()[y][x] = Instantiate(ResourceMgr.GetMapEditorSell(), mapParent.transform).GetComponent<MapSell>();
+                map.GetMap()[y][x].SetIndexVector(x, y);
+                map.GetMap()[y][x].transform.position =
+                    new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y,
+                                mapParent.transform.position.z);
             }
         }
     }
 
-    //맵을 초기화 시킵니다
+    //맵을 초기화 합니다
     public void ResetMap()
     {
-        if (map == null)
-            return;
-
-        for(int y = 0; y < map.Length; y++)
-        {
-            for(int x = 0; x < map[y].Length; x++)
-            {
-                map[y][x].RemoveMapSell();
-            }
-        }
+        map.ResetMap();
     }
 
     //입력받은 위치에 상자를 설정합니다
@@ -69,13 +61,14 @@ public class MapMgr : MonoBehaviour
     {
         SetOnSquare(iv.x, iv.y, isOn, square);
     }
+
     //입력받은 위치에 상자를 설정합니다
     public void SetOnSquare(int x, int y, bool isOn, SquareCtrl square)
     {
-        map[y][x].SetOnSquare(isOn, square);
+        map.SetOnSquare(x, y, isOn, square);
     }
 
-    public MapSell[][] GetMap()
+    public Map GetMap()
     {
         return map;
     }
@@ -89,14 +82,7 @@ public class MapMgr : MonoBehaviour
     //입력한 값에 위치한 셀을 반환합니다
     public MapSell GetMapElement(int x, int y)
     {
-        if(map.Length > y && y >= 0 &&
-            map[y].Length > x && x >= 0 &&
-            map[y][x] != null)
-        {
-            return map[y][x];
-        }
-
-        return null;
+        return map.GetMapElement(x, y);
     }
 
     //입력한 벡터에서 입력한 방향으로의 가장끝 셀을 찾습니다
@@ -108,6 +94,5 @@ public class MapMgr : MonoBehaviour
             return FindFinalSell(dir, nextIv);
         }
         return GetMapElement(iv);
-
     }
 }

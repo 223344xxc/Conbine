@@ -70,7 +70,7 @@ public class SquareMgr : MonoBehaviour
             }
         }
 
-        MapSell[][] map = mapMgr.GetMap();
+        MapSell[][] map = mapMgr.GetMap().GetMap();
 
         switch (dir)
         {

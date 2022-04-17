@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MapEditorInput : MonoBehaviour
 {
     private InputField mapSizeInputField;
+    private InputField mapNameInputField;
+
     private IndexVector inputMapSize;
     private List<MapEditorSell> selectMapSell;
 
@@ -25,7 +27,7 @@ public class MapEditorInput : MonoBehaviour
     {
         selectMapSell = new List<MapEditorSell>();
         mapSizeInputField = GameObject.Find("MapSizeInputField").GetComponent<InputField>();
-       
+        mapNameInputField = GameObject.Find("MapNameInputField").GetComponent<InputField>();
     }
 
     private void Update()
@@ -93,9 +95,16 @@ public class MapEditorInput : MonoBehaviour
         string[] sizeStr = mapSizeInputField.text.Split('/');
         inputMapSize.Set(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
     }
-
+   
+    
     public IndexVector GetInputMapSize()
     {
         return inputMapSize;
+    }
+
+    //편집중인 맵의 이름을 반환합니다
+    public string GetEditingMapName()
+    {
+        return mapNameInputField.text;
     }
 }

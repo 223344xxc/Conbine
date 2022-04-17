@@ -26,7 +26,16 @@ public class MapEditorMgr : MonoBehaviour
         mapMgr.CreateMap(mapEditorInput.GetInputMapSize(), 4.5f);
     }
 
-    public void SetMapSize(int x, int y)
+    //맵을 저장합니다
+    public void SaveMap()
     {
+        SaveMgr.WriteText(FilePathMgr.GetMapDataPath(mapEditorInput.GetEditingMapName()),
+            SaveMgr.ConnectSaveData(mapEditorInput.GetEditingMapName(), 
+                                    mapEditorInput.GetInputMapSize().ToString()));
+    }
+
+    public void ReadMap()
+    {
+        SaveMgr.ReadText(FilePathMgr.GetMapDataPath(mapEditorInput.GetEditingMapName())).Log();
     }
 }

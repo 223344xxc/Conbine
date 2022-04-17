@@ -8,7 +8,7 @@ public enum MapSellType
     Normal, //기본 블럭
 }
 
-public class MapSell : MonoBehaviour
+public class MapSell : MonoBehaviour, DataSaveInterface
 {
     [SerializeField] private MapSellType mapType;
     private IndexVector indexVector;
@@ -85,4 +85,16 @@ public class MapSell : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    #region DataSaveInterface
+    public string Save()
+    {
+        return "";
+    }
+
+    public void Load(string str)
+    {
+
+    }
+    #endregion
 }

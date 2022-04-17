@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct IndexVector
+public struct IndexVector : DataSaveInterface
 {
     public int x;
     public int y;
 
     public override string ToString()
     {
-        return "x:" + x + "   y:" + y;
+        return "x:" + x + "/y:" + y;
     }
 
     public static IndexVector right {
@@ -98,4 +98,16 @@ public struct IndexVector
     {
         return new IndexVector(iv1.x - iv2.x, iv1.y - iv2.y);
     }
+
+    #region DataSaveInterface
+    public string Save()
+    {
+        return x + SaveMgr.DataEndSign.endData + y;
+    }
+
+    public void Load(string str)
+    {
+        string[] data = str.SplitToString(SaveMgr.DataEndSign.endData);
+    }
+    #endregion
 }
