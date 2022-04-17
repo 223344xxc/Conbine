@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Game\MapSell.cs" />
     <Compile Include="Assets\Script\Game\SquareCtrl.cs" />
+    <Compile Include="Assets\Script\Manager\SaveMgr.cs" />
     <Compile Include="Assets\Script\AddOption\IndexVector.cs" />
     <Compile Include="Assets\Script\MapEditor\MapEditorInput.cs" />
     <Compile Include="Assets\Script\Manager\GameMgr.cs" />
@@ -66,10 +67,14 @@
     <Compile Include="Assets\Script\AddOption\Report.cs" />
     <Compile Include="Assets\Script\MapEditor\MapEditorSell.cs" />
     <Compile Include="Assets\Script\Manager\MapMgr.cs" />
-    <Compile Include="Assets\Script\Manager\SaveMgr.cs" />
     <Compile Include="Assets\Script\Manager\FilePathMgr.cs" />
+    <Compile Include="Assets\Script\Data\Map.cs" />
+    <Compile Include="Assets\Script\Data\DataSaveInterface.cs" />
+    <Compile Include="Assets\Script\Manager\ResourceMgr.cs" />
+    <Compile Include="Assets\Script\AddOption\StringOption.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Resources\Data\MapData\Map_1.txt" />
      <None Include="Assets\Resources\Data\MapData\test.txt" />
     <Reference Include="UnityEngine">
       <HintPath>D:\Unity\Hub\Editor\2020.1.0f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
