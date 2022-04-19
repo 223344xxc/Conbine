@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapEditorMgr : MonoBehaviour
+public class MapEditorManager : MonoBehaviour
 {
-    private MapMgr mapMgr;
+    private MapManager mapMgr;
     private MapEditorInput mapEditorInput;
 
 
@@ -15,7 +15,7 @@ public class MapEditorMgr : MonoBehaviour
 
     private void InitMapEditorMgr()
     {
-        mapMgr = GameObject.Find("MapManager").GetComponent<MapMgr>();
+        mapMgr = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapEditorInput = GameObject.Find("MapEditorInput").GetComponent<MapEditorInput>();
     }
     
@@ -29,13 +29,13 @@ public class MapEditorMgr : MonoBehaviour
     //맵을 저장합니다
     public void SaveMap()
     {
-        SaveMgr.WriteText(FilePathMgr.GetMapDataPath(mapEditorInput.GetEditingMapName()),
-            SaveMgr.ConnectSaveData(mapEditorInput.GetEditingMapName(), 
+        SaveManager.WriteText(FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName()),
+            SaveManager.ConnectSaveData(mapEditorInput.GetEditingMapName(), 
                                     mapEditorInput.GetInputMapSize().ToString()));
     }
 
     public void ReadMap()
     {
-        SaveMgr.ReadText(FilePathMgr.GetMapDataPath(mapEditorInput.GetEditingMapName())).Log();
+        SaveManager.ReadText(FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName())).Log();
     }
 }

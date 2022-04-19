@@ -11,14 +11,14 @@ public enum MoveDirection
     Down, // ↓
 }
 
-public class SquareMgr : MonoBehaviour
+public class SquareManager : MonoBehaviour
 {
-    public static SquareMgr instance;
+    public static SquareManager instance;
 
     [SerializeField] private GameObject squarePrefab; //임시 변수
     [SerializeField] private List<SquareCtrl> squareList;
 
-    private MapMgr mapMgr;
+    private MapManager mapMgr;
 
 
     private void Awake()
@@ -30,7 +30,7 @@ public class SquareMgr : MonoBehaviour
     {
         instance = this;
         squareList = new List<SquareCtrl>();
-        mapMgr = GameObject.Find("MapManager").GetComponent<MapMgr>();
+        mapMgr = GameObject.Find("MapManager").GetComponent<MapManager>();
     }
 
 

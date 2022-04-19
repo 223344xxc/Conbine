@@ -106,9 +106,9 @@ public class Map : DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
-        string saveData = SaveMgr.ConnectSaveData(
-            SaveMgr.ConnectData(SaveMgr.DataEndSign.dataNameEnd, SaveMgr.MapData.mapNameDataName, mapName),
-            SaveMgr.ConnectData(SaveMgr.DataEndSign.dataNameEnd, SaveMgr.MapData.mapSizeDataName, mapSize.ToString()));
+        string saveData = SaveManager.ConnectSaveData(
+            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapNameDataName, mapName),
+            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSizeDataName, mapSize.ToString()));
         return saveData;
 
     }

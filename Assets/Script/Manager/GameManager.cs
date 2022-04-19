@@ -8,7 +8,7 @@ public enum GameState
     Pause,//일시정지 상태
 }
 
-public class GameMgr : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private void Awake()
     {

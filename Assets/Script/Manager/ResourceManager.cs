@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ResourceMgr
+public static class ResourceManager
 {
     //리소스 파일 이름 입니다
     public static class ResourceName
@@ -27,14 +27,14 @@ public static class ResourceMgr
     public static GameObject GetMapSell()
     {
         return LoadPrefab(
-            FilePathMgr.ConnectPath(
-            FilePathMgr.FileName.prefab, ResourceName.mapSellPrefab));
+            FilePathManager.ConnectPath(
+            FilePathManager.FileName.prefab, ResourceName.mapSellPrefab));
     }
     //맵 에디터 셀 프리펩을 반환합니다
     public static GameObject GetMapEditorSell()
     {
         return LoadPrefab(
-            FilePathMgr.ConnectPath(
-            FilePathMgr.FileName.prefab, ResourceName.mapEditorSellPrefab));
+            FilePathManager.ConnectPath(
+            FilePathManager.FileName.prefab, ResourceName.mapEditorSellPrefab));
     }
 }

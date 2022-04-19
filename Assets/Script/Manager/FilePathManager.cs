@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class FilePathMgr
+public static class FilePathManager
 {
     //파일 이름 입니다
     public static class FileName
@@ -27,7 +27,7 @@ public static class FilePathMgr
                 continue;
             }
 
-            path = path + "/" + paths[i];
+            path = string.Concat(path, SaveManager.DataEndSign.endData, paths[i]);
         }
         return path;
     }

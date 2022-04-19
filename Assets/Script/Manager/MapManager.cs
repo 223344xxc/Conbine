@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapMgr : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
     [SerializeField] private Vector2 size; //임시 변수
     [SerializeField] private float sellSize;
@@ -41,7 +41,7 @@ public class MapMgr : MonoBehaviour
             map.GetMap()[y] = new MapSell[size.x];
             for (int x = 0; x < size.x; x++)
             {
-                map.GetMap()[y][x] = Instantiate(ResourceMgr.GetMapEditorSell(), mapParent.transform).GetComponent<MapSell>();
+                map.GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), mapParent.transform).GetComponent<MapSell>();
                 map.GetMap()[y][x].SetIndexVector(x, y);
                 map.GetMap()[y][x].transform.position =
                     new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y,

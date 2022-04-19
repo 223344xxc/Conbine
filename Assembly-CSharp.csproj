@@ -57,21 +57,21 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Game\MapSell.cs" />
     <Compile Include="Assets\Script\Game\SquareCtrl.cs" />
-    <Compile Include="Assets\Script\Manager\SaveMgr.cs" />
+    <Compile Include="Assets\Script\AddOption\StringOption.cs" />
     <Compile Include="Assets\Script\AddOption\IndexVector.cs" />
-    <Compile Include="Assets\Script\MapEditor\MapEditorInput.cs" />
-    <Compile Include="Assets\Script\Manager\GameMgr.cs" />
-    <Compile Include="Assets\Script\MapEditor\MapEditorMgr.cs" />
-    <Compile Include="Assets\Script\Game\PlayerInputCtrl.cs" />
-    <Compile Include="Assets\Script\Manager\SquareMgr.cs" />
-    <Compile Include="Assets\Script\AddOption\Report.cs" />
-    <Compile Include="Assets\Script\MapEditor\MapEditorSell.cs" />
-    <Compile Include="Assets\Script\Manager\MapMgr.cs" />
-    <Compile Include="Assets\Script\Manager\FilePathMgr.cs" />
+    <Compile Include="Assets\Script\Manager\ResourceManager.cs" />
     <Compile Include="Assets\Script\Data\Map.cs" />
     <Compile Include="Assets\Script\Data\DataSaveInterface.cs" />
-    <Compile Include="Assets\Script\Manager\ResourceMgr.cs" />
-    <Compile Include="Assets\Script\AddOption\StringOption.cs" />
+    <Compile Include="Assets\Script\MapEditor\MapEditorInput.cs" />
+    <Compile Include="Assets\Script\Manager\GameManager.cs" />
+    <Compile Include="Assets\Script\MapEditor\MapEditorManager.cs" />
+    <Compile Include="Assets\Script\Game\PlayerInputCtrl.cs" />
+    <Compile Include="Assets\Script\AddOption\Report.cs" />
+    <Compile Include="Assets\Script\MapEditor\MapEditorSell.cs" />
+    <Compile Include="Assets\Script\Manager\MapManager.cs" />
+    <Compile Include="Assets\Script\Manager\FilePathManager.cs" />
+    <Compile Include="Assets\Script\Manager\SaveManager.cs" />
+    <Compile Include="Assets\Script\Manager\SquareManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\Data\MapData\Map_1.txt" />

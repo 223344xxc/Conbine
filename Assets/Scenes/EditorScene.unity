@@ -838,7 +838,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 743645522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a246624db0c05f5409eec07aa6d2fa66, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f16cb2a603cf3f479a780301d230145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 6241050231016460321, guid: c2ce8e8289b7d524a9b5c85387d799db, type: 3}

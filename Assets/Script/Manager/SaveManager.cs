@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public static class SaveMgr
+public static class SaveManager
 {
     //맵 데이터 정보 이름 입니다
     public static class MapData
@@ -30,7 +30,7 @@ public static class SaveMgr
 
         if (!File.Exists(filePath))
         {
-            sw = new StreamWriter(path + ".txt");
+            sw = new StreamWriter(string.Concat(path, ".txt"));
         }
 
         sw.WriteLine(str);
@@ -48,7 +48,7 @@ public static class SaveMgr
 
         if (!File.Exists(path))
         {
-            sr = new StreamReader(path + ".txt");
+            sr = new StreamReader(string.Concat(path, ".txt"));
         }
 
         str = sr.ReadToEnd();
@@ -65,11 +65,11 @@ public static class SaveMgr
         {
             if (i == 0)
             {
-                data += datas[i];
+                data = string.Concat(data, datas[i]);
                 continue;
             }
 
-            data += DataEndSign.endLine + datas[i];
+            data = string.Concat(data, DataEndSign.endLine, datas[i]);
         }
         return data;
     }
@@ -81,11 +81,11 @@ public static class SaveMgr
         {
             if(i == 0)
             {
-                data += datas[i];
+                data = string.Concat(data, datas[i]);
                 continue;
             }
 
-            data += "\n" + datas[i];
+            data = string.Concat(data, DataEndSign.endLine, datas[i]);
         }
 
         return data;
