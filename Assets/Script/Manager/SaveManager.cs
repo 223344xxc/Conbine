@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Text;
 
 public static class SaveManager
 {
@@ -57,37 +58,39 @@ public static class SaveManager
         return str;
     }
 
-    //입력받은 데이터들을 연결합니다
+    //입력받은 데이터 라인들을 연결합니다
     public static string ConnectSaveData(params string[] datas)
     {
-        string data = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < datas.Length; i++)
         {
             if (i == 0)
             {
-                data = string.Concat(data, datas[i]);
+                stringBuilder.Append(datas[i]);
                 continue;
             }
 
-            data = string.Concat(data, DataEndSign.endLine, datas[i]);
+            stringBuilder.Append(DataEndSign.endLine);
+            stringBuilder.Append(datas[i]);
         }
-        return data;
+        return stringBuilder.ToString();
     }
 
+    //입력받은 데이터들을 연결합니다
     public static string ConnectData(string between, params string[] datas)
     {
-        string data = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < datas.Length; i++)
         {
             if(i == 0)
             {
-                data = string.Concat(data, datas[i]);
+                stringBuilder.Append(datas[i]);
                 continue;
             }
 
-            data = string.Concat(data, DataEndSign.endLine, datas[i]);
+            stringBuilder.Append(between);
+            stringBuilder.Append(datas[i]);
         }
-
-        return data;
+        return stringBuilder.ToString();
     }
 }
