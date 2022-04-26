@@ -24,7 +24,7 @@ public class MapEditorManager : MonoBehaviour
     public void MapReset()
     {
         mapMgr.ResetMap();
-        mapMgr.CreateMap(mapEditorInput.GetInputMapSize(), 4.5f);
+        mapMgr.CreateMap(mapEditorInput.GetInputMapSize(), 5.5f);
     }
 
     //맵을 저장합니다

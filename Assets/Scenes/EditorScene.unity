@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 0, y: 0}
-  sellSize: 4.5
+  sellSize: 5.5
   sellPrefab: {fileID: 1862436027151004127, guid: a4373ecb6b1fd614a83f5c1bd8e672b2, type: 3}
 --- !u!1 &676442187
 GameObject:
@@ -1171,7 +1171,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
