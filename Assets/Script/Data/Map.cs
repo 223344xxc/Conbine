@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class Map : DataSaveInterface
 {
@@ -106,9 +107,20 @@ public class Map : DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int y = 0; y < map.Length; y++)
+        {
+            for (int x = 0; x < map[y].Length; x++)
+            {
+                stringBuilder.Append(SaveManager.ConnectData(SaveManager.DataEndSign.endLine, map[y][x].Save(), ""));
+            }
+        }
+
         string saveData = SaveManager.ConnectSaveData(
             SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapNameDataName, mapName),
-            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSizeDataName, mapSize.ToString()));
+            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSizeDataName, mapSize.Save()),
+            stringBuilder.ToString());
         return saveData;
 
     }

@@ -89,7 +89,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
-        return "";
+        return SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSellDataName, mapType.ToString());
     }
 
     public void Load(string str)

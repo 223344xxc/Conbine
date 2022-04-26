@@ -102,7 +102,7 @@ public struct IndexVector : DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
-        return x + SaveManager.DataEndSign.endData + y;
+        return SaveManager.ConnectData(SaveManager.DataEndSign.endData, x.ToString(), y.ToString());
     }
 
     public void Load(string str)

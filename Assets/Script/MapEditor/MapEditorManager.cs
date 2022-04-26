@@ -17,6 +17,7 @@ public class MapEditorManager : MonoBehaviour
     {
         mapMgr = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapEditorInput = GameObject.Find("MapEditorInput").GetComponent<MapEditorInput>();
+        mapEditorInput.SetMap(mapMgr.GetMap());
     }
     
     //에디터 맵을 다시 그립니다
@@ -30,8 +31,7 @@ public class MapEditorManager : MonoBehaviour
     public void SaveMap()
     {
         SaveManager.WriteText(FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName()),
-            SaveManager.ConnectSaveData(mapEditorInput.GetEditingMapName(), 
-                                    mapEditorInput.GetInputMapSize().ToString()));
+            mapMgr.GetMap().Save());
     }
 
     public void ReadMap()

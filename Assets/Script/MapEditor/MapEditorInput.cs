@@ -8,7 +8,7 @@ public class MapEditorInput : MonoBehaviour
     private InputField mapSizeInputField;
     private InputField mapNameInputField;
 
-    private IndexVector inputMapSize;
+    //private IndexVector inputMapSize;
     private List<MapEditorSell> selectMapSell;
 
 
@@ -17,6 +17,8 @@ public class MapEditorInput : MonoBehaviour
     private bool isClickDown;
     private bool isClickUp;
     private bool beginObjectisSelect = false;
+
+    private Map nowEditingMap;
 
     private void Awake()
     {
@@ -34,6 +36,16 @@ public class MapEditorInput : MonoBehaviour
     {
         InputUpdate();
         CursorRayUpdate();
+    }
+
+    public void SetMap(Map map)
+    {
+        nowEditingMap = map;
+    }
+
+    public Map GetMap()
+    {
+        return nowEditingMap;
     }
 
     //사용자의 입력 업데이트 함수입니다
@@ -93,18 +105,23 @@ public class MapEditorInput : MonoBehaviour
     public void OnEndEdit_MapSizeInputField()
     {
         string[] sizeStr = mapSizeInputField.text.Split('/');
-        inputMapSize.Set(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
+        nowEditingMap.SetMapSize(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
     }
    
-    
+
+    public void OnEndEdit_MapNameInputField()
+    {
+        nowEditingMap.SetMapName(mapNameInputField.text);
+    }
+
     public IndexVector GetInputMapSize()
     {
-        return inputMapSize;
+        return nowEditingMap.GetMapSize();
     }
 
     //편집중인 맵의 이름을 반환합니다
     public string GetEditingMapName()
     {
-        return mapNameInputField.text;
+        return nowEditingMap.GetMapName();
     }
 }
