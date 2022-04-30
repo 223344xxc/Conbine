@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\MapEditor\MapEditorSell.cs" />
     <Compile Include="Assets\Script\Manager\MapManager.cs" />
     <Compile Include="Assets\Script\Manager\FilePathManager.cs" />
+    <Compile Include="Assets\Script\Game\MapSellType.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\Data\MapData\Map_1.txt" />

@@ -1,12 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum MapSellType
-{
-    None,   //투명 블럭
-    Normal, //기본 블럭
-}
+using MapSellTypeOptions;
 
 public class MapSell : MonoBehaviour, DataSaveInterface
 {
@@ -14,7 +9,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     private IndexVector indexVector;
     private bool isSquareOn = false;
     private SquareCtrl onSquare;
-
+    
     protected virtual void Awake()
     {
         InitMapSell();
@@ -22,7 +17,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
     private void InitMapSell()
     {
-        mapType = MapSellType.Normal;
+        mapType.SetType(MapSellType.Normal);
     }
 
     public IndexVector GetIndexVector()
@@ -72,7 +67,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     //상자가 움직일수 있는지 여부를 반환합니다
     public bool CanMoveThere()
     {
-        if (mapType == MapSellType.Normal && !isSquareOn)
+        if (mapType.CompareCode(MapSellType.Normal) && !isSquareOn)
             return true;
         return false;
     }
@@ -82,6 +77,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     {
         if (onSquare)
             onSquare.RemoveSquare();
+
 
         Destroy(gameObject);
     }
@@ -94,7 +90,6 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
     public void Load(string str)
     {
-
     }
     #endregion
 }

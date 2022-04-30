@@ -108,6 +108,8 @@ public struct IndexVector : DataSaveInterface
     public void Load(string str)
     {
         string[] data = str.SplitToString(SaveManager.DataEndSign.endData);
+        x = int.Parse(data[0]);
+        y = int.Parse(data[1]);
     }
     #endregion
 }

@@ -6,7 +6,6 @@ public class PlayerInputCtrl : MonoBehaviour
 {
     void Start()
     {
-        
     }
 
     void Update()

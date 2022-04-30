@@ -127,7 +127,30 @@ public class Map : DataSaveInterface
 
     public void Load(string str)
     {
+        //SaveManager.ReadText(FilePathManager.GetMapDataPath(mapName)).Log();
 
+        string[] fullData = str.SplitToString(SaveManager.DataEndSign.endLine);
+
+        for(int i = 0; i < fullData.Length; i++)
+        {
+            string[] dataLine = fullData[i].SplitToString(SaveManager.DataEndSign.dataNameEnd);
+
+            if (dataLine[0].CompareTo(SaveManager.MapData.mapNameDataName) == 0)
+            {
+                "dataname".Log();
+                mapName = dataLine[1];
+            }
+            else if(dataLine[0].CompareTo(SaveManager.MapData.mapSizeDataName) == 0)
+            {
+                "datasize".Log();
+                mapSize.Load(dataLine[1]);
+                InitMap(mapSize);
+            }
+            else if(dataLine[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
+            {
+                
+            }
+        }
     }
     #endregion
 }
