@@ -36,10 +36,8 @@ public class MapEditorManager : MonoBehaviour
 
     public void ReadMap()
     {
-        SaveManager.ReadText(FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName())).Log();
         mapMgr.GetMap().Load(SaveManager.ReadText(
             FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName())));
 
-        mapMgr.ResetMap();
     }
 }

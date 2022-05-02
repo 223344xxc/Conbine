@@ -76,17 +76,21 @@ public struct IndexVector : DataSaveInterface
     
 
     //일반 실수 2개를 인덱스 벡터로 전환합니다
-    public void CastIndexVector(float x, float y)
+    public IndexVector CastIndexVector(float x, float y)
     {
         this.x = (int)x;
         this.y = (int)y;
+
+        return this;
     }
     
     //일반 벡터를 인덱스 벡터로 전환합니다
-    public void CastIndexVector(Vector2 v)
+    public IndexVector CastIndexVector(Vector2 v)
     {
         this.x = (int)v.x;
         this.y = (int)v.y;
+
+        return this;
     }
 
     public static IndexVector operator + (IndexVector iv1, IndexVector iv2)

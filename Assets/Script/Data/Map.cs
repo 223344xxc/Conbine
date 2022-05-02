@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
-public class Map : DataSaveInterface
+public class Map : MonoBehaviour, DataSaveInterface
 {
     private MapSell[][] map; //맵 배열
     private IndexVector mapSize;
     private float sellSize;
     private string mapName;
+    private GameObject parent;
 
     public IndexVector GetMapSize()
     {
@@ -53,16 +54,36 @@ public class Map : DataSaveInterface
     {
         ResetMap();
 
+        CreateMap(sizeX, sizeY);
+    }
+
+    public void CreateMap(IndexVector size, float sellSize = 5.5f)
+    {
+        CreateMap(size.x, size.y, sellSize);
+    }
+
+    public void CreateMap(int sizeX, int sizeY, float sellSize = 5.5f)
+    {
+        parent = GameObject.Find("Map");
+    
         SetMapSize(sizeX, sizeY);
+        Vector2 offset;
+        offset.x = (mapSize.x / 2.0f) * sellSize - (sellSize * 0.5f);
+        offset.y = (mapSize.y / 2.0f) * sellSize - (sellSize * 0.5f);
+
         map = new MapSell[sizeY][];
-        for(int y = 0; y < map.Length; y++)
+        for (int y = 0; y < map.Length; y++)
         {
             map[y] = new MapSell[sizeX];
             for (int x = 0; x < map[y].Length; x++)
             {
-                map[y][x] = new MapSell();
+                GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), parent.transform).GetComponent<MapSell>();
+                GetMap()[y][x].SetIndexVector(x, y);
+                GetMap()[y][x].transform.position =
+                    new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y, 1);
             }
         }
+
     }
 
     //맵을 초기화 합니다
@@ -78,6 +99,8 @@ public class Map : DataSaveInterface
                 map[y][x].RemoveMapSell();
             }
         }
+
+        map = null;
     }
 
     //입력받은 위치에 상자를 설정합니다
@@ -128,7 +151,7 @@ public class Map : DataSaveInterface
     public void Load(string str)
     {
         //SaveManager.ReadText(FilePathManager.GetMapDataPath(mapName)).Log();
-
+        int sellCount = 0;
         string[] fullData = str.SplitToString(SaveManager.DataEndSign.endLine);
 
         for(int i = 0; i < fullData.Length; i++)
@@ -137,18 +160,17 @@ public class Map : DataSaveInterface
 
             if (dataLine[0].CompareTo(SaveManager.MapData.mapNameDataName) == 0)
             {
-                "dataname".Log();
                 mapName = dataLine[1];
             }
             else if(dataLine[0].CompareTo(SaveManager.MapData.mapSizeDataName) == 0)
             {
-                "datasize".Log();
                 mapSize.Load(dataLine[1]);
                 InitMap(mapSize);
             }
             else if(dataLine[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
             {
-                
+                map[sellCount / mapSize.x][sellCount % mapSize.x].Load(dataLine[1]);
+                sellCount += 1;
             }
         }
     }

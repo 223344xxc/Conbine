@@ -8,7 +8,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] private float sellSize;
     
     [SerializeField] private GameObject sellPrefab;
-    private GameObject mapParent;
     private Map map;
     //private MapSell[][] map; //맵 배열
     //private IndexVector mapSize;
@@ -21,33 +20,16 @@ public class MapManager : MonoBehaviour
     //맵 초기화
     private void InitMapMgr()
     {
-        mapParent = GameObject.Find("Map");
         map = new Map();
-        map.GetMapSize().CastIndexVector(size);
-
-        CreateMap(map.GetMapSize(), sellSize);
+        
+        
+        CreateMap(map.GetMapSize().CastIndexVector(size), sellSize);
     }
 
     //입력받은 맵 사이즈와 셀 사이즈를 기반으로 맵을 생성합니다
     public void CreateMap(IndexVector size, float sellSize)
     {
-        Vector2 offset;
-        offset.x = (size.x / 2.0f) * sellSize - (sellSize * 0.5f);
-        offset.y = (size.y / 2.0f) * sellSize - (sellSize * 0.5f);
-
-        map.InitMap(size.x, size.y);
-        for (int y = 0; y < size.y; y++)
-        {
-            map.GetMap()[y] = new MapSell[size.x];
-            for (int x = 0; x < size.x; x++)
-            {
-                map.GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), mapParent.transform).GetComponent<MapSell>();
-                map.GetMap()[y][x].SetIndexVector(x, y);
-                map.GetMap()[y][x].transform.position =
-                    new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y,
-                                mapParent.transform.position.z);
-            }
-        }
+        map.CreateMap(size, sellSize);
     }
 
     //맵을 초기화 합니다

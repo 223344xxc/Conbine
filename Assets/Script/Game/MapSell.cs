@@ -5,7 +5,7 @@ using MapSellTypeOptions;
 
 public class MapSell : MonoBehaviour, DataSaveInterface
 {
-    [SerializeField] private MapSellType mapType;
+    private MapSellType mapType;
     private IndexVector indexVector;
     private bool isSquareOn = false;
     private SquareCtrl onSquare;
@@ -78,7 +78,6 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         if (onSquare)
             onSquare.RemoveSquare();
 
-
         Destroy(gameObject);
     }
 
@@ -90,6 +89,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
     public void Load(string str)
     {
+        mapType.SetType(int.Parse(str));
     }
     #endregion
 }
