@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private Vector2 size; //임시 변수
+    [SerializeField] private string loadMapName; //임시 변수
     [SerializeField] private float sellSize;
     
     [SerializeField] private GameObject sellPrefab;
     private Map map;
-    //private MapSell[][] map; //맵 배열
-    //private IndexVector mapSize;
 
     private void Awake()
     {
@@ -21,10 +19,11 @@ public class MapManager : MonoBehaviour
     private void InitMapMgr()
     {
         map = new Map();
-        
-        
-        CreateMap(map.GetMapSize().CastIndexVector(size), sellSize);
+
+
+        LoadMap(loadMapName);
     }
+
 
     //입력받은 맵 사이즈와 셀 사이즈를 기반으로 맵을 생성합니다
     public void CreateMap(IndexVector size, float sellSize)
@@ -76,5 +75,10 @@ public class MapManager : MonoBehaviour
             return FindFinalSell(dir, nextIv);
         }
         return GetMapElement(iv);
+    }
+
+    public void LoadMap(string mapName)
+    {
+        map.Load(SaveManager.ReadText(FilePathManager.GetMapDataPath(mapName)));
     }
 }

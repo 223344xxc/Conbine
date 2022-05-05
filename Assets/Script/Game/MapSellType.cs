@@ -2,11 +2,19 @@
 namespace MapSellTypeOptions { 
     public struct MapSellType
     {
+        #region TileDefine
         public const int Normal = 0;
         public const int Transparency = 1;
         public const int Wall = 2;
-        private static readonly int[] typeCompareArray = { Normal, Transparency, Wall };
-        private static readonly string[] typeNameArray = { "Normal", "Transparency", "Wall" };
+        public const int Lock = 3;
+        public const int BlackHole = 4;
+
+        public static readonly int[] typeCompareArray = 
+            { Normal, Transparency, Wall, Lock, BlackHole};
+
+        public static readonly string[] typeNameArray = 
+            { "Normal", "Transparency", "Wall", "Lock", "BlackHole"};
+        #endregion
 
         public int sellTypeCode;
         

@@ -38,6 +38,7 @@ public class SquareManager : MonoBehaviour
     public void SummonSquare(int x, int y)
     {
         SquareCtrl sc = Instantiate(squarePrefab).GetComponent<SquareCtrl>();
+        sc.transform.localPosition = Vector3.zero;
         sc.SetListIndex(squareList.Count);
         squareList.Add(sc);
         mapMgr.SetOnSquare(x, y, true, sc);

@@ -10,7 +10,7 @@ public class SquareCtrl : MonoBehaviour
     private bool isTrakingTarget;
     private Vector3 moveTarget;
 
-    private static float squareSpeed = 100;
+    private static float squareSpeed = 150;
 
     private Animator anim;
 

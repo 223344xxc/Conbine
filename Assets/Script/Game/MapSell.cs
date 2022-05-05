@@ -9,7 +9,9 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     private IndexVector indexVector;
     private bool isSquareOn = false;
     private SquareCtrl onSquare;
-    
+    private SpriteRenderer spriteRenderer;
+
+
     protected virtual void Awake()
     {
         InitMapSell();
@@ -18,6 +20,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     private void InitMapSell()
     {
         mapType.SetType(MapSellType.Normal);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public IndexVector GetIndexVector()
@@ -33,6 +36,16 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void SetIndexVector(int x, int y)
     {
         indexVector.Set(x, y);
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        SetPosition(pos.x, pos.y, pos.z);
+    }
+
+    public void SetPosition(float x, float y, float z)
+    {
+        transform.localPosition = new Vector3(x, y, z);
     }
 
     //자신 위에 있는 상자를 수정합니다
@@ -57,13 +70,6 @@ public class MapSell : MonoBehaviour, DataSaveInterface
             return null;
     }
 
-
-    public void SetMapType(MapSellType type)
-    {
-        mapType = type;
-    }
-
-
     //상자가 움직일수 있는지 여부를 반환합니다
     public bool CanMoveThere()
     {
@@ -81,15 +87,43 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         Destroy(gameObject);
     }
 
+
+    //자신의 맵 타일 타입을 변경합니다
+    //변경한 타입에 따라 스프라이트 혹은 색을 변경합니다
+    public void SetSellType(int typeCode)
+    {
+        mapType.SetType(typeCode);
+
+        switch (mapType.sellTypeCode)
+        {
+            case MapSellType.Normal:
+                spriteRenderer.color = new Color(0, 0.56f, 0.56f, 1.0f); //임시 색상
+                break;
+
+            case MapSellType.Transparency:
+                spriteRenderer.color = new Color(0, 0.56f, 0.56f, 0.0f); //임시 색상
+                break;
+
+            case MapSellType.Wall:
+                spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f); //임시 색상
+                break;
+
+            default:
+                spriteRenderer.color = new Color(1, 1, 1);
+                break;
+        }
+    }
+
     #region DataSaveInterface
     public string Save()
     {
-        return SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSellDataName, mapType.ToString());
+        return SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, 
+                                       SaveManager.MapData.mapSellDataName, mapType.ToString());
     }
 
     public void Load(string str)
     {
-        mapType.SetType(int.Parse(str));
+        SetSellType(int.Parse(str));
     }
     #endregion
 }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MapSellTypeOptions;
+using UnityEngine.EventSystems;
 
 public class MapEditorInput : MonoBehaviour
 {
     private InputField mapSizeInputField;
     private InputField mapNameInputField;
+    private Dropdown mapSellTypeDropDown;
 
-    //private IndexVector inputMapSize;
+
     private List<MapEditorSell> selectMapSell;
 
 
@@ -30,6 +33,15 @@ public class MapEditorInput : MonoBehaviour
         selectMapSell = new List<MapEditorSell>();
         mapSizeInputField = GameObject.Find("MapSizeInputField").GetComponent<InputField>();
         mapNameInputField = GameObject.Find("MapNameInputField").GetComponent<InputField>();
+        mapSellTypeDropDown = GameObject.Find("SellTypeDropDown").GetComponent<Dropdown>();
+        
+        
+        List<Dropdown.OptionData> optionData = new List<Dropdown.OptionData>();
+        for(int i = 0; i < MapSellType.typeNameArray.Length; i++)
+        {
+            optionData.Add(new Dropdown.OptionData(MapSellType.typeNameArray[i]));
+        }
+        mapSellTypeDropDown.options = optionData;
     }
 
     private void Update()
@@ -78,7 +90,7 @@ public class MapEditorInput : MonoBehaviour
                 beginClickHitObject.MapSellRelease();
             }
         }
-        if (isClick)
+        if (isClick && EventSystem.current.IsPointerOverGameObject() == false)
         {
             if (hit)
             {
@@ -108,10 +120,19 @@ public class MapEditorInput : MonoBehaviour
         nowEditingMap.SetMapSize(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
     }
    
-
+    //맵 이름 인풋필드 편집 종료시 호출됩니다
+    //편집중인 맵 이름을 바꿉니다
     public void OnEndEdit_MapNameInputField()
     {
         nowEditingMap.SetMapName(mapNameInputField.text);
+    }
+
+    public void OnEndEdit_MapSellTypeDropDown()
+    {
+        for(int i = 0; i < selectMapSell.Count; i++)
+        {
+            selectMapSell[i].SetSellType(MapSellType.typeCompareArray[mapSellTypeDropDown.value]);
+        }
     }
 
     public IndexVector GetInputMapSize()

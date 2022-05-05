@@ -54,7 +54,7 @@ public class Map : MonoBehaviour, DataSaveInterface
     {
         ResetMap();
 
-        CreateMap(sizeX, sizeY);
+        CreateMap(mapSize);
     }
 
     public void CreateMap(IndexVector size, float sellSize = 5.5f)
@@ -77,10 +77,10 @@ public class Map : MonoBehaviour, DataSaveInterface
             map[y] = new MapSell[sizeX];
             for (int x = 0; x < map[y].Length; x++)
             {
-                GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), parent.transform).GetComponent<MapSell>();
-                GetMap()[y][x].SetIndexVector(x, y);
-                GetMap()[y][x].transform.position =
-                    new Vector3(x * sellSize - offset.x, y * -sellSize + offset.y, 1);
+                GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), parent.transform).
+                                                                            GetComponent<MapSell>();
+                GetMapElement(x, y).SetIndexVector(x, y);
+                GetMapElement(x, y).SetPosition(x * sellSize - offset.x, y * -sellSize + offset.y, 1);
             }
         }
 
@@ -118,7 +118,6 @@ public class Map : MonoBehaviour, DataSaveInterface
         {
             return map[y][x];
         }
-
         return null;
     }
 
@@ -136,13 +135,16 @@ public class Map : MonoBehaviour, DataSaveInterface
         {
             for (int x = 0; x < map[y].Length; x++)
             {
-                stringBuilder.Append(SaveManager.ConnectData(SaveManager.DataEndSign.endLine, map[y][x].Save(), ""));
+                stringBuilder.Append(SaveManager.ConnectData(SaveManager.DataEndSign.endLine, 
+                                                             map[y][x].Save(), ""));
             }
         }
 
         string saveData = SaveManager.ConnectSaveData(
-            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapNameDataName, mapName),
-            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, SaveManager.MapData.mapSizeDataName, mapSize.Save()),
+            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, 
+                                    SaveManager.MapData.mapNameDataName, mapName),
+            SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, 
+                                    SaveManager.MapData.mapSizeDataName, mapSize.Save()),
             stringBuilder.ToString());
         return saveData;
 
@@ -150,7 +152,6 @@ public class Map : MonoBehaviour, DataSaveInterface
 
     public void Load(string str)
     {
-        //SaveManager.ReadText(FilePathManager.GetMapDataPath(mapName)).Log();
         int sellCount = 0;
         string[] fullData = str.SplitToString(SaveManager.DataEndSign.endLine);
 
@@ -169,7 +170,7 @@ public class Map : MonoBehaviour, DataSaveInterface
             }
             else if(dataLine[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
             {
-                map[sellCount / mapSize.x][sellCount % mapSize.x].Load(dataLine[1]);
+                GetMapElement(sellCount % mapSize.x, sellCount / mapSize.x).Load(dataLine[1]);
                 sellCount += 1;
             }
         }
