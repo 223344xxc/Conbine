@@ -28,7 +28,11 @@ public struct IndexVector : DataSaveInterface
         get => new IndexVector(0, 0);
     }
 
-    //입력받은 MoveDirection 에 일치하는 방향 벡터를 반환합니다
+    /// <summary>
+    /// 입력받은 MoveDirection 에 일치하는 방향 벡터를 반환합니다.
+    /// </summary>
+    /// <param name="direction"> 방향 </param>
+    /// <returns></returns>
     public static IndexVector GetMoveDirectionToIndexVector(MoveDirection direction)
     {
         switch (direction)
@@ -75,7 +79,9 @@ public struct IndexVector : DataSaveInterface
     }
     
 
-    //일반 실수 2개를 인덱스 벡터로 전환합니다
+    /// <summary>
+    /// 일반 실수 2개를 인덱스 벡터로 전환합니다.
+    /// </summary>
     public IndexVector CastIndexVector(float x, float y)
     {
         this.x = (int)x;
@@ -84,7 +90,11 @@ public struct IndexVector : DataSaveInterface
         return this;
     }
     
-    //일반 벡터를 인덱스 벡터로 전환합니다
+    /// <summary>
+    /// 일반 벡터를 인덱스 벡터로 전환합니다.
+    /// </summary>
+    /// <param name="v"> 일반 벡터 </param>
+    /// <returns></returns>
     public IndexVector CastIndexVector(Vector2 v)
     {
         this.x = (int)v.x;

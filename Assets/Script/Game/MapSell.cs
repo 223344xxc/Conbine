@@ -48,7 +48,11 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         transform.localPosition = new Vector3(x, y, z);
     }
 
-    //자신 위에 있는 상자를 수정합니다
+    /// <summary>
+    /// 자신 위에 있는 상자를 수정합니다.
+    /// </summary>
+    /// <param name="isOn"> 상자가 위에 있는지 여부 </param>
+    /// <param name="square"> 상자 오브젝트 </param>
     public void SetOnSquare(bool isOn, SquareCtrl square = null)
     {
         isSquareOn = isOn;
@@ -61,7 +65,9 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         }
     }
 
-    //자신의 위에 있는 상자를 반환합니다
+    /// <summary>
+    /// 자신의 위에 있는 상자를 반환합니다.
+    /// </summary>
     public SquareCtrl GetOnSquare()
     {
         if (isSquareOn && onSquare)
@@ -70,7 +76,9 @@ public class MapSell : MonoBehaviour, DataSaveInterface
             return null;
     }
 
-    //상자가 움직일수 있는지 여부를 반환합니다
+    /// <summary>
+    /// 상자가 움직일 수 있는지 여부를 반환합니다.
+    /// </summary>
     public bool CanMoveThere()
     {
         if (mapType.CompareCode(MapSellType.Normal) && !isSquareOn)
@@ -78,7 +86,9 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         return false;
     }
 
-    //자신과 위에있는 상자를 삭제합니다
+    /// <summary>
+    /// 자신과 위에있는 상자를 삭제합니다.
+    /// </summary>
     public void RemoveMapSell()
     {
         if (onSquare)
@@ -88,8 +98,12 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     }
 
 
-    //자신의 맵 타일 타입을 변경합니다
-    //변경한 타입에 따라 스프라이트 혹은 색을 변경합니다
+    // (test) 변경한 타입에 따라 스프라이트 혹은 색을 변경합니다
+    /// <summary>
+    /// 자신의 맵 타일 타입을 변경합니다.
+    /// 타입에 따른 수정사항이 실행됩니다.
+    /// </summary>
+    /// <param name="typeCode"> 맵 타일 코드 </param>
     public void SetSellType(int typeCode)
     {
         mapType.SetType(typeCode);

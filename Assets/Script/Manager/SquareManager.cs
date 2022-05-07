@@ -34,7 +34,9 @@ public class SquareManager : MonoBehaviour
     }
 
 
-    //입력받은 위치에 사각형 생성합니다
+    /// <summary>
+    /// 입력받은 위치에 상자를 생성합니다.
+    /// </summary>
     public void SummonSquare(int x, int y)
     {
         SquareCtrl sc = Instantiate(squarePrefab).GetComponent<SquareCtrl>();
@@ -44,7 +46,11 @@ public class SquareManager : MonoBehaviour
         mapMgr.SetOnSquare(x, y, true, sc);
     }
 
-    //입력받은 상자를 이동시킵니다
+    /// <summary>
+    /// 입력받은 상자를 이동시킵니다.
+    /// </summary>
+    /// <param name="dir"> 이동할 방향 </param>
+    /// <param name="square"> 움직일 상자 객체 </param>
     public void SquareMove(MoveDirection dir, SquareCtrl square)
     {
         if (square)
@@ -60,7 +66,10 @@ public class SquareManager : MonoBehaviour
         }
     }
 
-    //리스트에 있는 상자를 모두 입력받은 방향으로 이동시킵니다
+    /// <summary>
+    /// 리스트에 있는 모든 상자를 입력받은 방향으로 이동시킵니다.
+    /// </summary>
+    /// <param name="dir"> 움직일 방향 </param>
     public bool WorldSqaureMove(MoveDirection dir)
     {
         for(int i = 0; i < squareList.Count; i++)

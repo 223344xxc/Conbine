@@ -18,7 +18,9 @@ public class MapEditorSell : MapSell
         selectSpriteRenderer = transform.Find("SelectSprite").GetComponent<SpriteRenderer>();
     }
 
-    //셀을 클릭시 실행됩니다
+    /// <summary>
+    /// 셀을 클릭시 실행됩니다.
+    /// </summary>
     public bool MapSellClick()
     {
         if (isSelect)
@@ -29,14 +31,18 @@ public class MapEditorSell : MapSell
         return isSelect;
     }
 
-    //맵이 선택됬을때 실행됩니다
+    /// <summary>
+    /// 맵이 선택됐을때 실행됩니다.
+    /// </summary>
     public void MapSellSelect()
     {
         isSelect = true;
         selectSpriteRenderer.enabled = true;
     }
 
-    //맵이 선택 해제됬을때 실행됩니다
+    /// <summary>
+    /// 맵이 선택 해제됐을때 실행됩니다.
+    /// </summary>
     public void MapSellRelease()
     {
         isSelect = false;

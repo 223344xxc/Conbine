@@ -18,7 +18,11 @@ namespace MapSellTypeOptions {
 
         public int sellTypeCode;
         
-        //코드를 비교합니다
+        /// <summary>
+        /// 맵 타일 코드를 비교합니다.
+        /// </summary>
+        /// <param name="code"> 맵 타일 코드 </param>
+        /// <returns></returns>
         public bool CompareCode(int code)
         {
             return sellTypeCode == code;
@@ -31,14 +35,22 @@ namespace MapSellTypeOptions {
             sellTypeCode = code;
         }
 
-        //입력받은 코드의 MapSellType 에 맞는 이름을 반환합니다
+        /// <summary>
+        /// 입력받은 코드의 MapSellType 에 맞는 이름을 반환합니다.
+        /// </summary>
+        /// <param name="code"> 맵 타일 코드 </param>
+        /// <returns></returns>
         public static string GetTypeName(int code)
         {
             if (!ChackType(code)) return "";
             return typeNameArray[code];
         }
 
-        //입력받은 코드가 MapSellType 형식에 유효한지 검사합니다
+        /// <summary>
+        /// 입력받은 코드가 MapSellType 형식에 유효한지 검사합니다.
+        /// </summary>
+        /// <param name="code"> 맵 타일 코드 </param>
+        /// <returns></returns>
         private static bool ChackType(int code)
         {
             for(int i = 0; i < typeCompareArray.Length; i++)

@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class SquareCtrl : MonoBehaviour
 {
-    private int listIndex;          //SquareMgr 에 있는 리스트의 인덱스
-    private IndexVector mapIndex;   //MapMgr 에 있는 map 의 인덱스
+    /// <summary>
+    /// SquareMgr 에 있는 리스트의 인덱스 입니다.
+    /// </summary>
+    private int listIndex;          
+
+    /// <summary>
+    /// MapMgr 에 있는 map 의 인덱스 입니다.
+    /// </summary>
+    private IndexVector mapIndex; 
 
     private bool isTrakingTarget;
     private Vector3 moveTarget;
@@ -33,7 +40,9 @@ public class SquareCtrl : MonoBehaviour
         SquareMoveUpdate();
     }
 
-    //상자의 움직임 업데이트 입니다
+    /// <summary>
+    /// 상자의 움직임 업데이트 함수 입니다.
+    /// </summary>
     private void SquareMoveUpdate()
     {
         if (isTrakingTarget)
@@ -53,7 +62,9 @@ public class SquareCtrl : MonoBehaviour
         }
     }
 
-    //상자가 움직임이 끝나면 실행됩니다
+    /// <summary>
+    /// 상자의 움직임이 끝나면 실행되는 함수 입니다.
+    /// </summary>
     public void TrakingEnd()
     {
         isTrakingTarget = false;
@@ -82,7 +93,10 @@ public class SquareCtrl : MonoBehaviour
         return mapIndex;
     }
 
-    //상자의 목표 위치를 수정하고 움직입니다
+    /// <summary>
+    /// 상자의 목표 위치를 수정하고 움직입니다.
+    /// </summary>
+    /// <param name="pos"> 목표 좌표 </param>
     public void MoveToPosition(Vector3 pos)
     {
         isTrakingTarget = true;
@@ -94,7 +108,10 @@ public class SquareCtrl : MonoBehaviour
     }
 
 
-    //상자가 움직이는 방향에 맞춰 각도를 설정합니다
+    /// <summary>
+    /// 상자가 움직이는 방향에 맞춰 각도를 설정합니다.
+    /// </summary>
+    /// <param name="dir"> 상자의 방향 </param>
     public void SetSquareMoveAngle(MoveDirection dir)
     {
         switch (dir)
@@ -118,7 +135,9 @@ public class SquareCtrl : MonoBehaviour
         }
     }
 
-    //상자를 삭제합니다
+    /// <summary>
+    /// 상자를 삭제합니다.
+    /// </summary>
     public void RemoveSquare()
     {
         Destroy(gameObject);

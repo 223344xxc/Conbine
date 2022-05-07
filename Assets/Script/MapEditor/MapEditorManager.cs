@@ -20,14 +20,18 @@ public class MapEditorManager : MonoBehaviour
         mapEditorInput.SetMap(mapMgr.GetMap());
     }
     
-    //에디터 맵을 다시 그립니다
+    /// <summary>
+    /// 에디터 맵을 다시 그립니다.
+    /// </summary>
     public void MapReset()
     {
         mapMgr.ResetMap();
         mapMgr.CreateMap(mapEditorInput.GetInputMapSize(), 5.5f);
     }
 
-    //맵을 저장합니다
+    /// <summary>
+    /// 맵을 저장합니다.
+    /// </summary>
     public void SaveMap()
     {
         SaveManager.WriteText(FilePathManager.GetMapDataPath(mapEditorInput.GetEditingMapName()),

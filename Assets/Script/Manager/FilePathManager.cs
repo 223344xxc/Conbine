@@ -5,7 +5,9 @@ using System.Text;
 
 public static class FilePathManager
 {
-    //파일 이름 입니다
+    /// <summary>
+    /// 파일 이름 입니다.
+    /// </summary>
     public static class FileName
     {
         public const string assetFile = "Assets";
@@ -13,9 +15,14 @@ public static class FilePathManager
         public const string dataFile = "Data";
         public const string mapData = "MapData";
         public const string prefab = "Prefab";
+        public const string effect = "Effect";
     }
 
-    //입력받은 문자열들을 파일 경로로 가공합니다
+    /// <summary>
+    /// 입력받은 문자열들을 파일 경로로 가공합니다.
+    /// </summary>
+    /// <param name="paths"> 연결할 경로들 </param>
+    /// <returns></returns>
     public static string ConnectPath(params string[] paths)
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -35,7 +42,11 @@ public static class FilePathManager
         return stringBuilder.ToString();
     }
 
-    //맵 데이터 파일 경로를 반환합니다
+    /// <summary>
+    /// 맵 데이터 파일 경로를 반환합니다.
+    /// </summary>
+    /// <param name="fileName"> 파일 이름 </param>
+    /// <returns></returns>
     public static string GetMapDataPath(string fileName)
     {
         return ConnectPath(

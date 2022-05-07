@@ -86,7 +86,9 @@ public class Map : MonoBehaviour, DataSaveInterface
 
     }
 
-    //맵을 초기화 합니다
+    /// <summary>
+    /// 맵을 초기화 합니다.
+    /// </summary>
     public void ResetMap()
     {
         if (map == null)
@@ -103,13 +105,19 @@ public class Map : MonoBehaviour, DataSaveInterface
         map = null;
     }
 
-    //입력받은 위치에 상자를 설정합니다
+    /// <summary>
+    /// 입력받은 위치에 상자를 설정합니다.
+    /// </summary>
+    /// <param name="isOn"> 상자가 위에 있는지 여부 </param>
+    /// <param name="square"> 상자 객체 </param>
     public void SetOnSquare(int x, int y, bool isOn, SquareCtrl square)
     {
         map[y][x].SetOnSquare(isOn, square);
     }
 
-    //입력한 값에 위치한 셀을 반환합니다
+    /// <summary>
+    /// 입력한 값에 위치한 셀을 반환합니다.
+    /// </summary>
     public MapSell GetMapElement(int x, int y)
     {
         if (map.Length > y && y >= 0 &&

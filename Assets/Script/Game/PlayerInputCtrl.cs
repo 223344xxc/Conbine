@@ -30,5 +30,11 @@ public class PlayerInputCtrl : MonoBehaviour
         {
             SquareManager.instance.WorldSqaureMove(MoveDirection.Up);
         }
+
+        //test Code
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(ResourceManager.GetLockOpenEffect(), Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+        }
     }
 }
