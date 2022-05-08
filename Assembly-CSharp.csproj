@@ -69,11 +69,13 @@
     <Compile Include="Assets\Script\Manager\SaveManager.cs" />
     <Compile Include="Assets\Script\Game\PlayerInputCtrl.cs" />
     <Compile Include="Assets\Script\AddOption\Report.cs" />
+    <Compile Include="Assets\Script\Effect\SpriteEffectComponent.cs" />
     <Compile Include="Assets\Script\MapEditor\MapEditorSell.cs" />
     <Compile Include="Assets\Script\Game\MapSellType.cs" />
     <Compile Include="Assets\Script\Manager\MapManager.cs" />
     <Compile Include="Assets\Script\Manager\FilePathManager.cs" />
-    <Compile Include="Assets\Script\Effect\SpriteEffectComponent.cs" />
+    <Compile Include="Assets\Script\Game\ObjectClicker.cs" />
+    <Compile Include="Assets\Script\Manager\UserRaycastManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\Data\MapData\Map_1.txt" />
