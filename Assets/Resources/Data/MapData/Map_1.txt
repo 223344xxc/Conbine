@@ -16,13 +16,13 @@ MapSell:2
 MapSell:0
 MapSell:0
 MapSell:0
+MapSell:4
 MapSell:0
+MapSell:4
 MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
+MapSell:3
+MapSell:3
+MapSell:3
+MapSell:3
+MapSell:3
 
