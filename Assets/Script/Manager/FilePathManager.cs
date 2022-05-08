@@ -8,14 +8,20 @@ public static class FilePathManager
     /// <summary>
     /// 파일 이름 입니다.
     /// </summary>
-    public static class FileName
+    public struct FileName
     {
         public const string assetFile = "Assets";
+
         public const string resourcesFile = "Resources";
+
         public const string dataFile = "Data";
-        public const string mapData = "MapData";
         public const string prefab = "Prefab";
+
+        public const string mapData = "MapData";
         public const string effect = "Effect";
+        public const string sprite = "Sprite";
+
+        public const string mapSell = "MapSell";
     }
 
     /// <summary>
