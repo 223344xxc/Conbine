@@ -92,6 +92,7 @@ public class MapEditorInput : MonoBehaviour
                 beginObjectisSelect)
             {
                 beginClickHitObject.MapSellRelease();
+                selectMapSell.Remove(beginClickHitObject);
             }
         }
         if (isClick && EventSystem.current.IsPointerOverGameObject() == false)
@@ -99,8 +100,11 @@ public class MapEditorInput : MonoBehaviour
             if (hit)
             {
                 MapEditorSell mapEditorSell = hit.transform.gameObject.GetComponent<MapEditorSell>();
-                mapEditorSell.MapSellSelect();
-                selectMapSell.Add(mapEditorSell);
+                if (!mapEditorSell.GetIsSelect())
+                {
+                    mapEditorSell.MapSellSelect();
+                    selectMapSell.Add(mapEditorSell);
+                }
 
             }
             else
