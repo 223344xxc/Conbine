@@ -19,7 +19,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
     private void InitMapSell()
     {
-        mapType.SetType(MapSellType.Normal);
+        mapType.SetType(MapSellType.NORMAL);
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -81,7 +81,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// </summary>
     public bool CanMoveThere()
     {
-        if (mapType.CompareCode(MapSellType.Normal) && !isSquareOn)
+        if (mapType.CompareCode(MapSellType.NORMAL) && !isSquareOn)
             return true;
         return false;
     }
@@ -98,7 +98,6 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     }
 
 
-    // (test) 변경한 타입에 따라 스프라이트 혹은 색을 변경합니다
     /// <summary>
     /// 자신의 맵 타일 타입을 변경합니다.
     /// 타입에 따른 수정사항이 실행됩니다.
@@ -107,25 +106,8 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void SetSellType(int typeCode)
     {
         mapType.SetType(typeCode);
-
-        switch (mapType.sellTypeCode)
-        {
-            case MapSellType.Normal:
-                spriteRenderer.color = new Color(0, 0.56f, 0.56f, 1.0f); //임시 색상
-                break;
-
-            case MapSellType.Transparency:
-                spriteRenderer.color = new Color(0, 0.56f, 0.56f, 0.0f); //임시 색상
-                break;
-
-            case MapSellType.Wall:
-                spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f); //임시 색상
-                break;
-
-            default:
-                spriteRenderer.color = new Color(1, 1, 1);
-                break;
-        }
+        spriteRenderer.color = MapSellType.GetSellColor(mapType.sellTypeCode);
+        spriteRenderer.sprite = ResourceManager.GetMapSellSprite(mapType);
     }
 
     #region DataSaveInterface
