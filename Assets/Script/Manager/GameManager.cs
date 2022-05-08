@@ -10,6 +10,10 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    
+    [SerializeField] private bool isEditor = false;
+
     private void Awake()
     {
         InitGameMgr();
@@ -17,10 +21,13 @@ public class GameManager : MonoBehaviour
 
     private void InitGameMgr()
     {
-
+        instance = this;
     }
 
-
+    public bool IsEditing()
+    {
+        return isEditor;
+    }
     void Start()
     {
         

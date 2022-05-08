@@ -47,7 +47,7 @@ public class MapEditorInput : MonoBehaviour
     private void Update()
     {
         InputUpdate();
-        CursorRayUpdate();
+        SelectUpdate();
     }
 
     public void SetMap(Map map)
@@ -71,15 +71,13 @@ public class MapEditorInput : MonoBehaviour
     }
 
     /// <summary>
-    /// 커서 레이 업데이트 함수입니다.
+    /// 맵 선택 업데이트 함수입니다.
     /// </summary>
-    private void CursorRayUpdate()
+    private void SelectUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(
-            Camera.main.ScreenToWorldPoint(Input.mousePosition), 
-            Camera.main.ScreenToWorldPoint(Input.mousePosition));
-       
-        
+        RaycastHit2D hit = UserRaycastManager.instance.GetHitObject();
+
+
         if (isClickDown && hit)
         {
             beginClickHitObject = hit.transform.GetComponent<MapEditorSell>();

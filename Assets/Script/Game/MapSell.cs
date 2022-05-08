@@ -10,7 +10,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     private bool isSquareOn = false;
     private SquareCtrl onSquare;
     private SpriteRenderer spriteRenderer;
-
+    private ObjectClicker clicker;
 
     protected virtual void Awake()
     {
@@ -21,6 +21,13 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     {
         mapType.SetType(MapSellType.NORMAL);
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        clicker = GetComponent<ObjectClicker>();
+
+        if (clicker)
+        {
+            clicker.BindOnClickDown(() => { "click".Log(); });
+        }
     }
 
     public IndexVector GetIndexVector()

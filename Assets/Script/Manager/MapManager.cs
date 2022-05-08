@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private string loadMapName; //임시 변수
-    [SerializeField] private float sellSize;
-    
-    [SerializeField] private GameObject sellPrefab;
+    [SerializeField] private string loadMapName; //임시 변수 
     private Map map;
 
     private void Awake()
@@ -23,6 +20,11 @@ public class MapManager : MonoBehaviour
         map = new Map();
 
 
+        //LoadMap(loadMapName);
+    }
+
+    private void Start()
+    {
         LoadMap(loadMapName);
     }
 

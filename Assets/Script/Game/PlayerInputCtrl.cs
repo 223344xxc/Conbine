@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInputCtrl : MonoBehaviour
 {
+
     void Start()
     {
     }
@@ -35,6 +36,11 @@ public class PlayerInputCtrl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(ResourceManager.GetLockOpenEffect(), Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+
+
+            if (UserRaycastManager.instance.GetHitObject())
+                UserRaycastManager.instance.GetHitObject().
+                    transform.GetComponent<ObjectClicker>()?.OnClickDown();
         }
     }
 }

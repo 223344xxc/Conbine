@@ -65,6 +65,9 @@ public class Map : MonoBehaviour, DataSaveInterface
     public void CreateMap(int sizeX, int sizeY, float sellSize = 5.5f)
     {
         parent = GameObject.Find("Map");
+
+        GameObject sell = GameManager.instance.IsEditing() ?
+            ResourceManager.GetMapEditorSell() : ResourceManager.GetMapSell();
     
         SetMapSize(sizeX, sizeY);
         Vector2 offset;
@@ -74,13 +77,14 @@ public class Map : MonoBehaviour, DataSaveInterface
         map = new MapSell[sizeY][];
         for (int y = 0; y < map.Length; y++)
         {
-            map[y] = new MapSell[sizeX];
+            map[y] = new MapSell[sizeX];                     
+
             for (int x = 0; x < map[y].Length; x++)
             {
-                GetMap()[y][x] = Instantiate(ResourceManager.GetMapEditorSell(), parent.transform).
-                                                                            GetComponent<MapSell>();
+                GetMap()[y][x] = Instantiate(sell, parent.transform).GetComponent<MapSell>();
                 GetMapElement(x, y).SetIndexVector(x, y);
-                GetMapElement(x, y).SetPosition(x * sellSize - offset.x, y * -sellSize + offset.y, 1);
+                GetMapElement(x, y).SetPosition(x * sellSize - offset.x, 
+                                                y * -sellSize + offset.y, 1);
             }
         }
 
