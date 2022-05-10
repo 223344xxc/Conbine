@@ -26,7 +26,14 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
         if (clicker)
         {
-            clicker.BindOnClickDown(() => { "click".Log(); });
+            clicker.BindOnClickDown(() => {
+                if (mapType.CompareCode(MapSellType.LOCK))
+                {
+                    EffectManager.Instance.CreateEffect(
+                        ResourceManager.GetLockOpenEffect(),
+                        transform.position);
+                }
+            });
         }
     }
 

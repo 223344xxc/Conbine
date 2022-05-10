@@ -35,7 +35,8 @@ public class PlayerInputCtrl : MonoBehaviour
         //test Code
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(ResourceManager.GetLockOpenEffect(), Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+         
+          
 
 
             if (UserRaycastManager.instance.GetHitObject())

@@ -7,7 +7,7 @@ public class MapEditorManager : MonoBehaviour
     private MapManager mapMgr;
     private MapEditorInput mapEditorInput;
 
-
+    
     private void Awake()
     {
         InitMapEditorMgr();

@@ -35,6 +35,7 @@ public static class SaveManager
     public static void WriteText(string path, string str)
     {
         string filePath = path;
+        
         StreamWriter sw = null;
 
         if (!File.Exists(filePath))
