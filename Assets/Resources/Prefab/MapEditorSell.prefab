@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1077698915721907431}
   - component: {fileID: 5128689466110352532}
   - component: {fileID: 6474358281711976638}
+  - component: {fileID: 4987506840363929317}
   m_Layer: 0
   m_Name: MapEditorSell
   m_TagString: Untagged
@@ -123,6 +124,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e56ace1e29a9149a8b0bcfe4a2ee32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4987506840363929317
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862436027151004127}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3564364141475589374
 GameObject:
   m_ObjectHideFlags: 0

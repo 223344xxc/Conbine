@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6805739756416723376}
   - component: {fileID: 2878741832622448994}
   - component: {fileID: 5074200338825254893}
+  - component: {fileID: 3652734308343520791}
   m_Layer: 0
   m_Name: DefaultSell
   m_TagString: Untagged
@@ -135,3 +136,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1346e4a9f71476e48b664d3d3e17b190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3652734308343520791
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37902466016789755}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0fdc9591ca20d040a2651d398a7c77e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

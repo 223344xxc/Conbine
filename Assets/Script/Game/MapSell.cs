@@ -11,6 +11,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     private SquareCtrl onSquare;
     private SpriteRenderer spriteRenderer;
     private ObjectClicker clicker;
+    private Animator animator;
 
     protected virtual void Awake()
     {
@@ -21,7 +22,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     {
         mapType.SetType(MapSellType.NORMAL);
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        animator = GetComponent<Animator>();
         clicker = GetComponent<ObjectClicker>();
 
         if (clicker)
@@ -29,12 +30,14 @@ public class MapSell : MonoBehaviour, DataSaveInterface
             clicker.BindOnClickDown(() => {
                 if (mapType.CompareCode(MapSellType.LOCK))
                 {
+                    SetAnimationTrigger("PlayLockOpen");
                     EffectManager.Instance.CreateEffect(
                         ResourceManager.GetLockOpenEffect(),
                         transform.position);
                 }
             });
         }
+
     }
 
     public IndexVector GetIndexVector()
@@ -60,6 +63,19 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void SetPosition(float x, float y, float z)
     {
         transform.localPosition = new Vector3(x, y, z);
+    }
+
+    /// <summary>
+    /// 애니메이터가 있는지 판단하고 트리거를 실행합니다.
+    /// </summary>
+    /// <param name="triggerName"> 트리거 이름 </param>
+    public void SetAnimationTrigger(string triggerName)
+    {
+        if (animator != null)
+        {
+            triggerName.Log();
+            animator.SetTrigger(triggerName);
+        }
     }
 
     /// <summary>
