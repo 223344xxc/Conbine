@@ -37,9 +37,9 @@ public class MapEditorInput : MonoBehaviour
         
         
         List<Dropdown.OptionData> optionData = new List<Dropdown.OptionData>();
-        for(int i = 0; i < MapSellType.typeNameArray.Length; i++)
+        for(int i = 0; i < MapSellType.MAP_SELL_INFO_ARRAY.Length; i++)
         {
-            optionData.Add(new Dropdown.OptionData(MapSellType.typeNameArray[i]));
+            optionData.Add(new Dropdown.OptionData(MapSellType.MAP_SELL_INFO_ARRAY[i].typeName));
         }
         mapSellTypeDropDown.options = optionData;
     }
@@ -141,7 +141,7 @@ public class MapEditorInput : MonoBehaviour
     {
         for(int i = 0; i < selectMapSell.Count; i++)
         {
-            selectMapSell[i].SetSellType(MapSellType.typeCompareArray[mapSellTypeDropDown.value]);
+            selectMapSell[i].SetSellType(MapSellType.MAP_SELL_INFO_ARRAY[mapSellTypeDropDown.value].typeCode);
         }
     }
 

@@ -20,16 +20,17 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 
     private void InitMapSell()
     {
-        mapType.SetType(MapSellType.NORMAL);
+       
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         clicker = GetComponent<ObjectClicker>();
-
         if (clicker)
         {
             clicker.BindOnClickDown(() => {
-                if (mapType.CompareCode(MapSellType.LOCK))
+                if (mapType.CompareCode(MapSellType.LOCK_SELL))
                 {
+                    EffectManager.Instance.CreateEffect(ResourceManager.GetLockOpenEffect(), transform.position);
+
                     SetAnimationTrigger("PlayLockOpen");
                     EffectManager.Instance.CreateEffect(
                         ResourceManager.GetLockOpenEffect(),
@@ -38,7 +39,9 @@ public class MapSell : MonoBehaviour, DataSaveInterface
             });
         }
 
+        SetSellType(MapSellType.NORMAL_SELL);
     }
+
 
     public IndexVector GetIndexVector()
     {
@@ -73,7 +76,6 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     {
         if (animator != null)
         {
-            triggerName.Log();
             animator.SetTrigger(triggerName);
         }
     }
@@ -111,7 +113,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// </summary>
     public bool CanMoveThere()
     {
-        if (mapType.CompareCode(MapSellType.NORMAL) && !isSquareOn)
+        if (mapType.CompareCode(MapSellType.NORMAL_SELL) && !isSquareOn)
             return true;
         return false;
     }
@@ -136,8 +138,21 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void SetSellType(int typeCode)
     {
         mapType.SetType(typeCode);
+
+        animator.runtimeAnimatorController = ResourceManager.GetMapSellAnimator(mapType);
+
+
         spriteRenderer.color = MapSellType.GetSellColor(mapType.sellTypeCode);
         spriteRenderer.sprite = ResourceManager.GetMapSellSprite(mapType);
+    }
+
+    /// <summary>
+    /// 자신의 맵 타일 타입을 변경합니다.
+    /// </summary>
+    /// <param name="info"> 타일 정보 </param>
+    public void SetSellType(MapSellInfo info)
+    {
+        SetSellType(info.typeCode);
     }
 
     #region DataSaveInterface

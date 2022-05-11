@@ -1,66 +1,57 @@
 ﻿using UnityEngine;
 
 
-namespace MapSellDataDefine
-{
-    /// <summary>
-    /// 맵 타일의 색을 정의한 클래스 입니다.
-    /// </summary>
-    public class MapSellColor
-    {
-        public static Color NORMAL_SELL_COLOR = new Color(0.0f, 0.56f, 0.56f, 1);
-        public static Color TRANSPARENCY_SELL_COLOR = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        public static Color WALL_SELL_COLOR = new Color(0.3f, 0.3f, 0.3f, 1.0f);
-        public static Color LOCK_SELL_COLOR = Color.white;
-        public static Color BLACKHOLE_SELL_COLOR = Color.white;
-
-        public static readonly Color[] mapSellColorArray = {
-            NORMAL_SELL_COLOR,
-            TRANSPARENCY_SELL_COLOR,
-            WALL_SELL_COLOR,
-            LOCK_SELL_COLOR,
-            BLACKHOLE_SELL_COLOR
-        };
-    }
-}
-
 namespace MapSellTypeOptions {
   
+    /// <summary>
+    /// 맵 타일 데이터를 정의하는 구조체 입니다.
+    /// </summary>
+    public struct MapSellInfo
+    {
+        public int typeCode;
+        public string typeName;
+        public string spriteName;
+        public string animatorName;
+        public Color sellColor;
+
+        public MapSellInfo(int typeCode, string typeName, string spriteName, string animatorName, Color sellColor)
+        {
+            this.typeCode = typeCode;
+            this.typeName = typeName;
+            this.spriteName = spriteName;
+            this.animatorName = animatorName;
+            this.sellColor = sellColor;
+        }
+    }
+
     /// <summary>
     /// 맵 타일의 타입에 대한 처리를 위한 구조체 입니다.
     /// </summary>
     public struct MapSellType
     {
-        #region TileDefine
-        public const int NORMAL = 0;
-        public const int TRANSPARENCY = 1;
-        public const int WALL = 2;
-        public const int LOCK = 3;
-        public const int BLACKHOLE = 4;
+        public static readonly MapSellInfo NORMAL_SELL = 
+            new MapSellInfo(0, "Normal", "MapSell_Default", "DefaultSellController", new Color(0.0f, 0.56f, 0.56f, 1));
 
-        public static readonly int[] typeCompareArray = 
-            { NORMAL, TRANSPARENCY, WALL, LOCK, BLACKHOLE};
+        public static readonly MapSellInfo TRANSPARENCY_SELL = 
+            new MapSellInfo(1, "Transparency", "MapSell_Default", "DefaultSellController", new Color(1.0f, 1.0f, 1.0f, 0.0f));
 
-        public static readonly string[] typeNameArray = 
-            { "Normal", "Transparency", "Wall", "Lock", "BlackHole"};
+        public static readonly MapSellInfo WALL_SELL = 
+            new MapSellInfo(2, "Wall", "MapSell_Default", "DefaultSellController", new Color(0.3f, 0.3f, 0.3f, 1.0f));
 
-        #region 맵 스프라이트 이름 정보
-        public static string DEFAULT_MAP_SELL_SPRITE = "MapSell_Default";
-        public static string TRANSPARENCY_MAP_SELL_SPRITE = "MapSell_Default";
-        public static string WALL_MAP_SELL_SPRITE = "MapSell_Default";
-        public static string LOCK_MAP_SELL_SPRITE = "MapSell_Lock";
-        public static string BLACKHOLE_MAP_SELL_SPRITE = "MapSell_Default";
-   
+        public static readonly MapSellInfo LOCK_SELL =
+            new MapSellInfo(3, "Lock", "MapSell_Lock", "LockSellController", Color.white);
 
-        public static readonly string[] typeSpriteNameArray = { 
-            DEFAULT_MAP_SELL_SPRITE, 
-            TRANSPARENCY_MAP_SELL_SPRITE,
-            WALL_MAP_SELL_SPRITE,
-            LOCK_MAP_SELL_SPRITE,
-            BLACKHOLE_MAP_SELL_SPRITE
+        public static readonly MapSellInfo BLACKHOLE_SELL = 
+            new MapSellInfo(4, "BlackHole", "MapSell_Default", "DefaultSellController", Color.white);
+
+
+        public static readonly MapSellInfo[] MAP_SELL_INFO_ARRAY = {
+            NORMAL_SELL,
+            TRANSPARENCY_SELL,
+            WALL_SELL,
+            LOCK_SELL,
+            BLACKHOLE_SELL,
         };
-        #endregion
-        #endregion
 
         public int sellTypeCode;
         
@@ -74,7 +65,7 @@ namespace MapSellTypeOptions {
             if (!ChackType(code))
                 return Color.white;
 
-            return MapSellDataDefine.MapSellColor.mapSellColorArray[code];
+            return MAP_SELL_INFO_ARRAY[code].sellColor;
         }
 
         /// <summary>
@@ -86,6 +77,18 @@ namespace MapSellTypeOptions {
         {
             return sellTypeCode == code;
         }
+
+        /// <summary>
+        /// 맵 타일 코드를 비교합니다.
+        /// </summary>
+        /// <param name="info"> 맵 타일 정보 </param>
+        /// <returns></returns>
+        public bool CompareCode(MapSellInfo info)
+        {
+            return CompareCode(info.typeCode);
+        }
+
+
 
         public void SetType(int code)
         {
@@ -102,7 +105,7 @@ namespace MapSellTypeOptions {
         public static string GetTypeName(int code)
         {
             if (!ChackType(code)) return "";
-            return typeNameArray[code];
+            return MAP_SELL_INFO_ARRAY[code].typeName;
         }
 
         /// <summary>
@@ -112,9 +115,9 @@ namespace MapSellTypeOptions {
         /// <returns></returns>
         private static bool ChackType(int code)
         {
-            for(int i = 0; i < typeCompareArray.Length; i++)
+            for(int i = 0; i < MAP_SELL_INFO_ARRAY.Length; i++)
             {
-                if (typeCompareArray[i] == code)
+                if (MAP_SELL_INFO_ARRAY[i].typeCode == code)
                     return true;
             }
             return false;
@@ -129,7 +132,20 @@ namespace MapSellTypeOptions {
             if (!ChackType(code))
                 return string.Empty;
 
-            return typeSpriteNameArray[code];
+            return MAP_SELL_INFO_ARRAY[code].spriteName;
+        }
+
+        /// <summary>
+        /// 입력받은 코드에 맞는 맵 타일의 애니메이터 이름을 반환합니다.
+        /// </summary>
+        /// <param name="code"> 타일 코드 </param>
+        /// <returns></returns>
+        public static string GetMapSellAnimatorName(int code)
+        {
+            if (!ChackType(code))
+                return string.Empty;
+
+            return MAP_SELL_INFO_ARRAY[code].animatorName;
         }
 
         public override string ToString()

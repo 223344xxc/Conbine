@@ -43,6 +43,16 @@ public static class ResourceManager
             return null;
     }
 
+    public static RuntimeAnimatorController LoadAnimator(string path)
+    {
+
+        RuntimeAnimatorController anim = LoadResource<RuntimeAnimatorController>(path);
+        if (anim)
+            return anim;
+        else
+            return null;
+    }
+
     /// <summary>
     /// 입력받은 경로의 프리펩을 읽어 반환합니다.
     /// </summary>
@@ -102,6 +112,15 @@ public static class ResourceManager
             FilePathManager.FileName.sprite, 
             FilePathManager.FileName.mapSell, 
             MapSellType.GetMapSellSpriteName(mapSellType.sellTypeCode)
+            ));
+    }
+
+    public static RuntimeAnimatorController GetMapSellAnimator(MapSellType mapSellType)
+    {
+        return LoadAnimator(FilePathManager.ConnectPath(
+            FilePathManager.FileName.animation,
+            FilePathManager.FileName.animationController,
+            MapSellType.GetMapSellAnimatorName(mapSellType.sellTypeCode)
             ));
     }
 }

@@ -16,10 +16,12 @@ public static class FilePathManager
 
         public const string dataFile = "Data";
         public const string prefab = "Prefab";
+        public const string animation = "Animation";
 
         public const string mapData = "MapData";
         public const string effect = "Effect";
         public const string sprite = "Sprite";
+        public const string animationController = "AnimationController";
 
         public const string mapSell = "MapSell";
     }
