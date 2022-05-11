@@ -243,9 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1587a07f3e5aec3469b1cb3efcc1e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadMapName: Map_1
-  sellSize: 5.5
-  sellPrefab: {fileID: 37902466016789755, guid: b67911d81cc938b42964a81f88898eaf, type: 3}
+  loadMapName: Map_3
 --- !u!1 &743645522
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cae7db3f2a3a64491c47dc1213185c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEditor: 0
 --- !u!1 &1310973951
 GameObject:
   m_ObjectHideFlags: 0
