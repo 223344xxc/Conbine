@@ -35,6 +35,12 @@ public class MapSell : MonoBehaviour, DataSaveInterface
                     EffectManager.Instance.CreateEffect(
                         ResourceManager.GetLockOpenEffect(),
                         transform.position);
+
+                }
+
+                else if (mapType.CompareCode(MapSellType.LOCK_OPEN_SELL))
+                {
+                    SetSellType(MapSellType.LOCK_SELL);
                 }
             });
         }
@@ -113,7 +119,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// </summary>
     public bool CanMoveThere()
     {
-        if (mapType.CompareCode(MapSellType.NORMAL_SELL) && !isSquareOn)
+        if (mapType.CanMove() && !isSquareOn)
             return true;
         return false;
     }

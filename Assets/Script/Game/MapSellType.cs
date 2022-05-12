@@ -13,14 +13,16 @@ namespace MapSellTypeOptions {
         public string spriteName;
         public string animatorName;
         public Color sellColor;
+        public bool canStand;
 
-        public MapSellInfo(int typeCode, string typeName, string spriteName, string animatorName, Color sellColor)
+        public MapSellInfo(int typeCode, string typeName, string spriteName, string animatorName, Color sellColor, bool canStand)
         {
             this.typeCode = typeCode;
             this.typeName = typeName;
             this.spriteName = spriteName;
             this.animatorName = animatorName;
             this.sellColor = sellColor;
+            this.canStand = canStand;
         }
 
         /// <summary>
@@ -59,6 +61,11 @@ namespace MapSellTypeOptions {
                 return this;
             }
 
+            public Builder setStand(bool stand)
+            {
+                info.canStand = stand;
+                return this;
+            }
             public MapSellInfo Build()
             {
                 return info;
@@ -79,6 +86,7 @@ namespace MapSellTypeOptions {
             setSpriteName("MapSell_Default").
             setAnimatorName("DefaultSellController").
             setColor(new Color(0.0f, 0.56f, 0.56f, 1)).
+            setStand(true).
             Build();
 
         public static readonly MapSellInfo TRANSPARENCY_SELL =
@@ -88,6 +96,7 @@ namespace MapSellTypeOptions {
             setSpriteName("MapSell_Default").
             setAnimatorName("DefaultSellController").
             setColor(new Color(1.0f, 1.0f, 1.0f, 0.0f)).
+            setStand(false).
             Build();
 
         public static readonly MapSellInfo WALL_SELL =
@@ -97,6 +106,7 @@ namespace MapSellTypeOptions {
             setSpriteName("MapSell_Lock").
             setAnimatorName("DefaultSellController").
             setColor(new Color(0.3f, 0.3f, 0.3f, 1.0f)).
+            setStand(false).
             Build();
 
         public static readonly MapSellInfo LOCK_SELL =
@@ -104,17 +114,29 @@ namespace MapSellTypeOptions {
             setTypeCode(3).
             setTypeName("Lock").
             setSpriteName("MapSell_Lock").
+            setAnimatorName("LockSellController").
+            setColor(Color.white).
+            setStand(false).
+            Build();
+
+        public static readonly MapSellInfo LOCK_OPEN_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(4).
+            setTypeName("LockOpen").
+            setSpriteName("MapSell_LockOpen").
             setAnimatorName("DefaultSellController").
             setColor(Color.white).
+            setStand(true).
             Build();
 
         public static readonly MapSellInfo BLACKHOLE_SELL =
             new MapSellInfo.Builder().
-            setTypeCode(4).
+            setTypeCode(5).
             setTypeName("BlackHole").
             setSpriteName("MapSell_Default").
-            setAnimatorName("LockSellController").
+            setAnimatorName("DefaultSellController").
             setColor(Color.white).
+            setStand(true).
             Build();
         #endregion
 
@@ -123,6 +145,7 @@ namespace MapSellTypeOptions {
             TRANSPARENCY_SELL,
             WALL_SELL,
             LOCK_SELL,
+            LOCK_OPEN_SELL,
             BLACKHOLE_SELL,
         };
 
@@ -219,6 +242,14 @@ namespace MapSellTypeOptions {
                 return string.Empty;
 
             return MAP_SELL_INFO_ARRAY[code].animatorName;
+        }
+
+        public bool CanMove()
+        {
+            if (!ChackType(sellTypeCode))
+                return false;
+
+            return MAP_SELL_INFO_ARRAY[sellTypeCode].canStand;
         }
 
         public override string ToString()

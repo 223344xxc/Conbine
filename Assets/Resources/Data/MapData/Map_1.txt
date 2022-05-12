@@ -4,7 +4,7 @@ MapSell:2
 MapSell:0
 MapSell:1
 MapSell:0
-MapSell:2
+MapSell:0
 MapSell:0
 MapSell:2
 MapSell:1
