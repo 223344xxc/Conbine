@@ -22,6 +22,48 @@ namespace MapSellTypeOptions {
             this.animatorName = animatorName;
             this.sellColor = sellColor;
         }
+
+        /// <summary>
+        /// 맵 타일 빌더 입니다.
+        /// </summary>
+        public struct Builder {
+            MapSellInfo info;
+            
+            public Builder setTypeCode(int code)
+            {
+                info.typeCode = code;
+                return this;
+            }
+
+            public Builder setTypeName(string name)
+            {
+                info.typeName = name;
+                return this;
+            }
+
+            public Builder setSpriteName(string name)
+            {
+                info.spriteName = name;
+                return this;
+            }
+
+            public Builder setAnimatorName(string name)
+            {
+                info.animatorName = name;
+                return this;
+            }
+
+            public Builder setColor(Color color)
+            {
+                info.sellColor = color;
+                return this;
+            }
+
+            public MapSellInfo Build()
+            {
+                return info;
+            }
+        }
     }
 
     /// <summary>
@@ -29,21 +71,52 @@ namespace MapSellTypeOptions {
     /// </summary>
     public struct MapSellType
     {
-        public static readonly MapSellInfo NORMAL_SELL = 
-            new MapSellInfo(0, "Normal", "MapSell_Default", "DefaultSellController", new Color(0.0f, 0.56f, 0.56f, 1));
+        #region 맵 타일 정의
+        public static readonly MapSellInfo NORMAL_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(0).
+            setTypeName("Normal").
+            setSpriteName("MapSell_Default").
+            setAnimatorName("DefaultSellController").
+            setColor(new Color(0.0f, 0.56f, 0.56f, 1)).
+            Build();
 
-        public static readonly MapSellInfo TRANSPARENCY_SELL = 
-            new MapSellInfo(1, "Transparency", "MapSell_Default", "DefaultSellController", new Color(1.0f, 1.0f, 1.0f, 0.0f));
+        public static readonly MapSellInfo TRANSPARENCY_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(1).
+            setTypeName("Transparency").
+            setSpriteName("MapSell_Default").
+            setAnimatorName("DefaultSellController").
+            setColor(new Color(1.0f, 1.0f, 1.0f, 0.0f)).
+            Build();
 
-        public static readonly MapSellInfo WALL_SELL = 
-            new MapSellInfo(2, "Wall", "MapSell_Default", "DefaultSellController", new Color(0.3f, 0.3f, 0.3f, 1.0f));
+        public static readonly MapSellInfo WALL_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(2).
+            setTypeName("Wall").
+            setSpriteName("MapSell_Lock").
+            setAnimatorName("DefaultSellController").
+            setColor(new Color(0.3f, 0.3f, 0.3f, 1.0f)).
+            Build();
 
         public static readonly MapSellInfo LOCK_SELL =
-            new MapSellInfo(3, "Lock", "MapSell_Lock", "LockSellController", Color.white);
+            new MapSellInfo.Builder().
+            setTypeCode(3).
+            setTypeName("Lock").
+            setSpriteName("MapSell_Lock").
+            setAnimatorName("DefaultSellController").
+            setColor(Color.white).
+            Build();
 
-        public static readonly MapSellInfo BLACKHOLE_SELL = 
-            new MapSellInfo(4, "BlackHole", "MapSell_Default", "DefaultSellController", Color.white);
-
+        public static readonly MapSellInfo BLACKHOLE_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(4).
+            setTypeName("BlackHole").
+            setSpriteName("MapSell_Default").
+            setAnimatorName("LockSellController").
+            setColor(Color.white).
+            Build();
+        #endregion
 
         public static readonly MapSellInfo[] MAP_SELL_INFO_ARRAY = {
             NORMAL_SELL,
