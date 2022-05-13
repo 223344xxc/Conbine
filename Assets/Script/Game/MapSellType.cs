@@ -124,8 +124,8 @@ namespace MapSellTypeOptions {
             setTypeCode(4).
             setTypeName("LockOpen").
             setSpriteName("MapSell_LockOpen").
-            setAnimatorName("DefaultSellController").
-            setColor(Color.white).
+            setAnimatorName("LockOpenSellController").
+            setColor(new Color(0.3f, 0.3f, 0.3f, 0.7f)).
             setStand(true).
             Build();
 
