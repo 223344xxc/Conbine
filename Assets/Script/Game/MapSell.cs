@@ -135,6 +135,11 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         Destroy(gameObject);
     }
 
+    public void RemoveOnSquare()
+    {
+        if (onSquare)
+            onSquare.RemoveSquare();
+    }
 
     /// <summary>
     /// 자신의 맵 타일 타입을 변경합니다.
@@ -159,6 +164,11 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void SetSellType(MapSellInfo info)
     {
         SetSellType(info.typeCode);
+    }
+
+    public MapSellType GetSellType()
+    {
+        return mapType;
     }
 
     #region DataSaveInterface

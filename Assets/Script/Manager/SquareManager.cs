@@ -37,8 +37,19 @@ public class SquareManager : MonoBehaviour
     /// <summary>
     /// 입력받은 위치에 상자를 생성합니다.
     /// </summary>
+    public void SummonSquare(IndexVector iv)
+    {
+        SummonSquare(iv.x, iv.y);
+    }
+
+    /// <summary>
+    /// 입력받은 위치에 상자를 생성합니다.
+    /// </summary>
     public void SummonSquare(int x, int y)
     {
+        if (mapMgr.GetMapElement(x, y).GetOnSquare() != null)
+            return;
+
         SquareCtrl sc = Instantiate(squarePrefab).GetComponent<SquareCtrl>();
         sc.transform.localPosition = Vector3.zero;
         sc.SetListIndex(squareList.Count);

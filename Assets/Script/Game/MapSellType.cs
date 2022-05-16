@@ -138,6 +138,7 @@ namespace MapSellTypeOptions {
             setColor(Color.white).
             setStand(true).
             Build();
+
         #endregion
 
         public static readonly MapSellInfo[] MAP_SELL_INFO_ARRAY = {
@@ -209,7 +210,7 @@ namespace MapSellTypeOptions {
         /// </summary>
         /// <param name="code"> 맵 타일 코드 </param>
         /// <returns></returns>
-        private static bool ChackType(int code)
+        public static bool ChackType(int code)
         {
             for(int i = 0; i < MAP_SELL_INFO_ARRAY.Length; i++)
             {

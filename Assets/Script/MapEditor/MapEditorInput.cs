@@ -34,14 +34,15 @@ public class MapEditorInput : MonoBehaviour
         mapSizeInputField = GameObject.Find("MapSizeInputField").GetComponent<InputField>();
         mapNameInputField = GameObject.Find("MapNameInputField").GetComponent<InputField>();
         mapSellTypeDropDown = GameObject.Find("SellTypeDropDown").GetComponent<Dropdown>();
-        
-        
+
         List<Dropdown.OptionData> optionData = new List<Dropdown.OptionData>();
         for(int i = 0; i < MapSellType.MAP_SELL_INFO_ARRAY.Length; i++)
         {
             optionData.Add(new Dropdown.OptionData(MapSellType.MAP_SELL_INFO_ARRAY[i].typeName));
         }
+
         mapSellTypeDropDown.options = optionData;
+
     }
 
     private void Update()
@@ -137,11 +138,34 @@ public class MapEditorInput : MonoBehaviour
         nowEditingMap.SetMapName(mapNameInputField.text);
     }
 
+    /// <summary>
+    /// 타일 타입 드롭다운 편집 종료시 호출됩니다.
+    /// </summary>
     public void OnEndEdit_MapSellTypeDropDown()
     {
+        if (!MapSellType.ChackType(mapSellTypeDropDown.value))
+            return;
+
         for(int i = 0; i < selectMapSell.Count; i++)
         {
             selectMapSell[i].SetSellType(MapSellType.MAP_SELL_INFO_ARRAY[mapSellTypeDropDown.value].typeCode);
+        }
+
+    }
+
+    public void AddSquareForSelectMapSell()
+    {
+        for(int i = 0;i < selectMapSell.Count; i++)
+        {
+            SquareManager.instance.SummonSquare(selectMapSell[i].GetIndexVector());
+        }
+    }
+
+    public void RemoveSquareForSelectMapSell()
+    {
+        for(int i = 0; i < selectMapSell.Count; i++)
+        {
+            selectMapSell[i].RemoveOnSquare();
         }
     }
 
