@@ -35,10 +35,6 @@ public class PlayerInputCtrl : MonoBehaviour
         //test Code
         if (Input.GetMouseButtonDown(0))
         {
-         
-          
-
-
             if (UserRaycastManager.instance.GetHitObject())
                 UserRaycastManager.instance.GetHitObject().
                     transform.GetComponent<ObjectClicker>()?.OnClickDown();

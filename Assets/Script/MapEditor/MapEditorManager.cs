@@ -25,6 +25,7 @@ public class MapEditorManager : MonoBehaviour
     /// </summary>
     public void MapReset()
     {
+        mapEditorInput.ResetSellSelect();
         mapMgr.ResetMap();
         mapMgr.CreateMap(mapEditorInput.GetInputMapSize(), 5.5f);
     }
@@ -40,6 +41,7 @@ public class MapEditorManager : MonoBehaviour
 
     public void ReadMap()
     {
+        mapEditorInput.ResetSellSelect();
         mapMgr.LoadMap(mapEditorInput.GetEditingMapName());
     }
 }

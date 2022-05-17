@@ -35,13 +35,16 @@ public class MapEditorInput : MonoBehaviour
         mapNameInputField = GameObject.Find("MapNameInputField").GetComponent<InputField>();
         mapSellTypeDropDown = GameObject.Find("SellTypeDropDown").GetComponent<Dropdown>();
 
+
         List<Dropdown.OptionData> optionData = new List<Dropdown.OptionData>();
         for(int i = 0; i < MapSellType.MAP_SELL_INFO_ARRAY.Length; i++)
         {
             optionData.Add(new Dropdown.OptionData(MapSellType.MAP_SELL_INFO_ARRAY[i].typeName));
         }
+        optionData.Add(new Dropdown.OptionData("-"));
 
         mapSellTypeDropDown.options = optionData;
+        mapSellTypeDropDown.SetValueWithoutNotify(mapSellTypeDropDown.options.Count - 1);
 
     }
 
@@ -90,8 +93,7 @@ public class MapEditorInput : MonoBehaviour
                 beginClickHitObject.GetIsSelect() &&
                 beginObjectisSelect)
             {
-                beginClickHitObject.MapSellRelease();
-                selectMapSell.Remove(beginClickHitObject);
+                MapSellRelease(beginClickHitObject);
             }
         }
         if (isClick && EventSystem.current.IsPointerOverGameObject() == false)
@@ -101,8 +103,7 @@ public class MapEditorInput : MonoBehaviour
                 MapEditorSell mapEditorSell = hit.transform.gameObject.GetComponent<MapEditorSell>();
                 if (!mapEditorSell.GetIsSelect())
                 {
-                    mapEditorSell.MapSellSelect();
-                    selectMapSell.Add(mapEditorSell);
+                    MapSellSelect(mapEditorSell);
                 }
 
             }
@@ -110,18 +111,74 @@ public class MapEditorInput : MonoBehaviour
             {
                 for (int i = 0; i < selectMapSell.Count; i++)
                 {
-                    selectMapSell[i].MapSellRelease();
+                    MapSellRelease(selectMapSell[i]);
                 }
-                selectMapSell.Clear();
             }
         }
         
     }
 
+    /// <summary>
+    /// 입력받은 맵 타일을 선택합니다.
+    /// </summary>
+    /// <param name="sell"> 선택할 타일 </param>
+    private void MapSellSelect(MapEditorSell sell)
+    {
+        sell.MapSellSelect();
+        selectMapSell.Add(sell);
+        RefreshMapSellTypeDropDown();
+    }
+
+    /// <summary>
+    /// 입력받은 맵 타일을 선택 해제합니다.
+    /// </summary>
+    /// <param name="sell"> 선택 해제할 타일 </param>
+    private void MapSellRelease(MapEditorSell sell)
+    {
+        sell.MapSellRelease();
+        selectMapSell.Remove(sell);
+        RefreshMapSellTypeDropDown();
+    }
+
+    /// <summary>
+    /// 모든 타일을 선택 해제합니다.
+    /// </summary>
+    public void ResetSellSelect()
+    {
+        for (int i = 0; i < selectMapSell.Count; i++)
+            MapSellRelease(selectMapSell[i]);
+
+    }
+
+    /// <summary>
+    /// 맵 타일 타입 드롭다운을 정리합니다.
+    /// </summary>
+    private void RefreshMapSellTypeDropDown()
+    {
+        if(selectMapSell.Count > 0)
+        {
+            int tempCode = selectMapSell[0].GetSellType().sellTypeCode;
+
+            for(int i = 0; i < selectMapSell.Count; i++)
+            {
+                if (!selectMapSell[i].GetSellType().CompareCode(tempCode))
+                {
+                    mapSellTypeDropDown.SetValueWithoutNotify(mapSellTypeDropDown.options.Count - 1);
+                    break;
+                }
+
+                mapSellTypeDropDown.SetValueWithoutNotify(tempCode);
+            }
+        }
+        else
+        {
+            mapSellTypeDropDown.SetValueWithoutNotify(mapSellTypeDropDown.options.Count - 1);
+        }
+    }
 
     /// <summary>
     /// 맵 사이즈 인풋필드 편집 종료시 호출됩니다.
-    /// 인풋필드로 받은 문자열을 inputMapSize 에 변환하여 입력합니다.
+    /// 인풋필드로 받은 문자열을 nowEditingMap 에 변환하여 입력합니다.
     /// </summary>
     public void OnEndEdit_MapSizeInputField()
     {
@@ -146,6 +203,9 @@ public class MapEditorInput : MonoBehaviour
         if (!MapSellType.ChackType(mapSellTypeDropDown.value))
             return;
 
+        if (selectMapSell.Count == 0)
+            mapSellTypeDropDown.SetValueWithoutNotify(mapSellTypeDropDown.options.Count - 1);
+
         for(int i = 0; i < selectMapSell.Count; i++)
         {
             selectMapSell[i].SetSellType(MapSellType.MAP_SELL_INFO_ARRAY[mapSellTypeDropDown.value].typeCode);
@@ -153,6 +213,9 @@ public class MapEditorInput : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 선택된 모든 타일위에 상자를 배치합니다.
+    /// </summary>
     public void AddSquareForSelectMapSell()
     {
         for(int i = 0;i < selectMapSell.Count; i++)
@@ -161,6 +224,10 @@ public class MapEditorInput : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 선택된 모든 타일위에 있는 상자를 제거합니다.
+    /// </summary>
     public void RemoveSquareForSelectMapSell()
     {
         for(int i = 0; i < selectMapSell.Count; i++)
@@ -169,6 +236,9 @@ public class MapEditorInput : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 편집중인 맵의 사이즈를 반환합니다.
+    /// </summary>
     public IndexVector GetInputMapSize()
     {
         return nowEditingMap.GetMapSize();

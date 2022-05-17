@@ -98,7 +98,9 @@ public class MapManager : MonoBehaviour
     public MapSell FindFinalSell(MoveDirection dir, IndexVector iv)
     {
         IndexVector nextIv = iv + IndexVector.GetMoveDirectionToIndexVector(dir);
-        if (GetMapElement(nextIv) != null && GetMapElement(nextIv).CanMoveThere())
+        if (GetMapElement(nextIv) != null && 
+            GetMapElement(iv).CanOutHere() && 
+            GetMapElement(nextIv).CanMoveThere())
         {
             return FindFinalSell(dir, nextIv);
         }
