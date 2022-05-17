@@ -1,7 +1,7 @@
 MapName:Map_1
 MapSize:5/5
 MapSell:0
-MapSell:0
+MapSell:1
 MapSell:4
 MapSell:0
 MapSell:0
@@ -11,12 +11,12 @@ MapSell:4
 MapSell:0
 MapSell:0
 MapSell:0
-MapSell:0
+MapSell:1
 MapSell:4
 MapSell:0
 MapSell:0
 MapSell:3
-MapSell:3
+MapSell:5
 MapSell:4
 MapSell:3
 MapSell:3

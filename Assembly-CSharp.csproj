@@ -61,7 +61,7 @@
     <Compile Include="Assets\Script\AddOption\IndexVector.cs" />
     <Compile Include="Assets\Script\Manager\EffectManager.cs" />
     <Compile Include="Assets\Script\Manager\ResourceManager.cs" />
-    <Compile Include="Assets\Script\Game\ObjectClicker.cs" />
+    <Compile Include="Assets\Script\Component\ObjectClicker.cs" />
     <Compile Include="Assets\Script\Data\Map.cs" />
     <Compile Include="Assets\Script\Manager\SquareManager.cs" />
     <Compile Include="Assets\Script\Manager\UserRaycastManager.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Assets\Script\Game\MapSellType.cs" />
     <Compile Include="Assets\Script\Manager\MapManager.cs" />
     <Compile Include="Assets\Script\Manager\FilePathManager.cs" />
-    <Compile Include="Assets\Script\TestClick.cs" />
+    <Compile Include="Assets\Script\Component\UIClicker.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\Data\MapData\Map_1.txt" />
