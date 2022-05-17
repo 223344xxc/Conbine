@@ -15,6 +15,7 @@ namespace MapSellTypeOptions {
         public Color sellColor;
         public bool canStand;
 
+
         public MapSellInfo(int typeCode, string typeName, string spriteName, string animatorName, Color sellColor, bool canStand)
         {
             this.typeCode = typeCode;
@@ -251,6 +252,14 @@ namespace MapSellTypeOptions {
                 return false;
 
             return MAP_SELL_INFO_ARRAY[sellTypeCode].canStand;
+        }
+
+        public bool CanOut()
+        {
+            if (CompareCode(BLACKHOLE_SELL.typeCode))
+                return false;
+
+            return true;
         }
 
         public override string ToString()

@@ -124,6 +124,11 @@ public class MapSell : MonoBehaviour, DataSaveInterface
         return false;
     }
 
+    public bool CanOutHere()
+    {
+        return mapType.CanOut();
+    }
+
     /// <summary>
     /// 자신과 위에있는 상자를 삭제합니다.
     /// </summary>
