@@ -135,7 +135,7 @@ namespace MapSellTypeOptions {
             setTypeCode(5).
             setTypeName("BlackHole").
             setSpriteName("MapSell_Default").
-            setAnimatorName("DefaultSellController").
+            setAnimatorName("BlackHoleSellController").
             setColor(Color.white).
             setStand(true).
             Build();

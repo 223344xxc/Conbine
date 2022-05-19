@@ -32,15 +32,15 @@ public class MapSell : MonoBehaviour, DataSaveInterface
                     EffectManager.Instance.CreateEffect(ResourceManager.GetLockOpenEffect(), transform.position);
 
                     SetAnimationTrigger("PlayLockOpen");
-                    EffectManager.Instance.CreateEffect(
-                        ResourceManager.GetLockOpenEffect(),
-                        transform.position);
 
                 }
 
                 else if (mapType.CompareCode(MapSellType.LOCK_OPEN_SELL))
                 {
-                    SetSellType(MapSellType.LOCK_SELL);
+                    EffectManager.Instance.CreateEffect(ResourceManager.GetLockOpenEffect(), transform.position);
+
+                    SetAnimationTrigger("PlayLockClose");
+                    
                 }
             });
         }
