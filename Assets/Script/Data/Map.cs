@@ -66,7 +66,7 @@ public class Map : MonoBehaviour, DataSaveInterface
     {
         parent = GameObject.Find("Map");
 
-        GameObject sell = GameManager.instance.IsEditing() ?
+        GameObject sell = GlobalGameManager.GetIsEditor() ?
             ResourceManager.GetMapEditorSell() : ResourceManager.GetMapSell();
     
         SetMapSize(sizeX, sizeY);
