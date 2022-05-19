@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private string loadMapName; //임시 변수 
     private Map map;
 
     private void Awake()
@@ -23,9 +22,10 @@ public class MapManager : MonoBehaviour
         //LoadMap(loadMapName);
     }
 
-    private void Start()
+    //testFunc
+    public void GameStart()
     {
-        LoadMap(loadMapName);
+        LoadMap(GlobalGameManager.GetMapName());
     }
 
 
