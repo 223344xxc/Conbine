@@ -10,6 +10,7 @@ public class GlobalGameManager : MonoBehaviour
 {
     private static string mapName;
     private static bool isEditor = false;
+    private static bool isLogin = false;
 
     private void Awake()
     {
@@ -18,14 +19,23 @@ public class GlobalGameManager : MonoBehaviour
 
     private void InitGlobalGameManager()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
+    /// <summary>
+    /// 씬을 전환합니다. 
+    /// </summary>
+    /// <param name="sceneName"> 씬 이름 </param>
     public void ChangeScene(string sceneName)
     {
         GameSceneManager.LoadScene(sceneName);
     }
 
+
+    /// <summary>
+    /// 게임씬을 로딩합니다.
+    /// </summary>
+    /// <param name="mapName"> 전환할 게임씬에서 로드할 맵 이름 </param>
     public void LoadGameScene(string mapName)
     {
         SetIsEditor(false);
@@ -33,12 +43,24 @@ public class GlobalGameManager : MonoBehaviour
         ChangeScene("GameScene");
     }
 
+    /// <summary>
+    /// 에디터 씬을 로딩합니다.
+    /// </summary>
     public void LoadEditorScene()
     {
         SetIsEditor(true);
         ChangeScene("EditorScene");
     }
 
+    /// <summary>
+    /// 메인 씬을 로딩합니다.
+    /// </summary>
+    public void LoadMainScene()
+    {
+        SetIsEditor(false);
+        SetMapName("");
+        ChangeScene("MainScene");
+    }
 
     public static void SetMapName(string name)
     {
@@ -58,5 +80,15 @@ public class GlobalGameManager : MonoBehaviour
     public static bool GetIsEditor()
     {
         return isEditor;
+    }
+
+    public static void SetIsLogin(bool login)
+    {
+        isLogin = login;
+    }
+
+    public static bool GetIsLogin()
+    {
+        return isLogin;
     }
 }

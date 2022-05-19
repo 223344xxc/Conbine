@@ -10,12 +10,9 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
-    public static bool isEditor = false;
-
     private GameState state;
     private MapManager mapManager;
+    private GlobalGameManager globalGameManager;
 
     private void Awake()
     {
@@ -29,19 +26,25 @@ public class GameManager : MonoBehaviour
 
     private void InitGameMgr()
     {
-        instance = this;
-
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+        globalGameManager = GameObject.Find("GlobalGameManager").GetComponent<GlobalGameManager>();
     }
 
+    /// <summary>
+    /// 게임 시작시 호출됩니다.
+    /// </summary>
     private void GameStart()
     {
         mapManager.GameStart();
         state = GameState.None;
     }
 
-    public bool IsEditing()
+    /// <summary>
+    /// 돌아가기 버튼 클릭시 호출됩니다.
+    /// 메인 씬으로 돌아갑니다.
+    /// </summary>
+    public void ReturnGame()
     {
-        return isEditor;
+        globalGameManager.LoadMainScene();
     }
 }
