@@ -52,11 +52,6 @@ public class MapEditorInput : MonoBehaviour
     {
         InputUpdate();
         SelectUpdate();
-
-        //test
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            GameSceneManager.LoadScene("GameScene");
     }
 
     public void SetMap(Map map)
