@@ -73,6 +73,7 @@ public class SquareManager : MonoBehaviour
                 mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
                 mapMgr.SetOnSquare(ms.GetIndexVector(), true, square);
                 square.SetSquareMoveAngle(dir);
+                square.SelectTrakingEndEvent(ms.GetSellType());
             }
         }
     }
