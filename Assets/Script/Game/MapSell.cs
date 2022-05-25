@@ -143,7 +143,10 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     public void RemoveOnSquare()
     {
         if (onSquare)
+        {
             onSquare.RemoveSquare();
+            SetOnSquare(false);
+        }
     }
 
     /// <summary>

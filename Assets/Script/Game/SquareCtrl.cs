@@ -160,6 +160,15 @@ public class SquareCtrl : MonoBehaviour
         trakingEndEvent = action;
     }
 
+    /// <summary>
+    /// 상자가 정지했을 때 실행되는 이벤트를 추가합니다.
+    /// </summary>
+    /// <param name="action"></param>
+    public void AddTrakingEndEvent(Action action)
+    {
+        trakingEndEvent += action;
+    }
+
     public void SelectTrakingEndEvent(MapSellType sellType)
     {
         if (sellType.CompareCode(MapSellType.BLACKHOLE_SELL.typeCode))
