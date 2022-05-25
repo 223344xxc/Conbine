@@ -76,10 +76,12 @@ public class SquareManager : MonoBehaviour
                 //square.SelectTrakingEndEvent(ms.GetSellType());
                 if (ms.GetSellType().CompareCode(MapSellType.BLACKHOLE_SELL))
                 {
+                    mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
+
+                    mapMgr.GetMapElement(square.GetMapIndex()).SetSellType(MapSellType.NORMAL_SELL);
                     square.SetTrakingEndEvent(() =>
                     {
-                        mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
-                        mapMgr.GetMapElement(square.GetMapIndex()).SetSellType(MapSellType.NORMAL_SELL);
+                        //mapMgr.GetMapElement(square.GetMapIndex()).SetSellType(MapSellType.NORMAL_SELL);
                     });
                     square.AddTrakingEndEvent(() => square.RemoveSquare());
                 }

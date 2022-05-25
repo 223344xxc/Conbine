@@ -2,7 +2,7 @@ MapName:Map_1
 MapSize:5/5
 MapSell:0
 MapSell:0
-MapSell:2
+MapSell:0
 MapSell:0
 MapSell:0
 MapSell:1
@@ -17,6 +17,7 @@ MapSell:0
 MapSell:5
 MapSell:0
 MapSell:5
+MapSell:0
 MapSell:0
 MapSell:0
 MapSell:0
