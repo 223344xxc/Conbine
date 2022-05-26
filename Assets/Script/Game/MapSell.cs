@@ -150,19 +150,26 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     }
 
     /// <summary>
+    /// 애니메이션에서 불리는 이벤트 함수입니다.
+    /// 타일의 타입을 변경합니다.
+    /// </summary>
+    /// <param name="typeCode"> 맵 타일 코드</param>
+    public void SetSellType_CallAnimation(int typeCode)
+    {
+        SetSellType(typeCode);
+    }
+
+    /// <summary>
     /// 자신의 맵 타일 타입을 변경합니다.
     /// 타입에 따른 수정사항이 실행됩니다.
     /// </summary>
     /// <param name="typeCode"> 맵 타일 코드 </param>
-    public void SetSellType(int typeCode)
+    public void SetSellType(int typeCode, bool isCalculationType = false)
     {
         mapType.SetType(typeCode);
 
-        animator.runtimeAnimatorController = ResourceManager.GetMapSellAnimator(mapType);
-
-
-        spriteRenderer.color = MapSellType.GetSellColor(mapType.sellTypeCode);
-        spriteRenderer.sprite = ResourceManager.GetMapSellSprite(mapType);
+        if (!isCalculationType)
+            RefreshSellType();
     }
 
     /// <summary>
@@ -171,8 +178,30 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// <param name="info"> 타일 정보 </param>
     public void SetSellType(MapSellInfo info)
     {
-        SetSellType(info.typeCode);
+        SetSellType(info.typeCode, false);
     }
+
+    /// <summary>
+    /// 자신의 맵 타일의 애니메이터와 스프라이트 렌더러를 타입 코드에 맞도록 수정합니다.
+    /// </summary>
+    public void RefreshSellType()
+    {
+        animator.runtimeAnimatorController = ResourceManager.GetMapSellAnimator(mapType);
+        spriteRenderer.color = MapSellType.GetSellColor(mapType.sellTypeCode);
+        spriteRenderer.sprite = ResourceManager.GetMapSellSprite(mapType);
+    }
+
+    /// <summary>
+    /// 상자의 이동 연산에 사용될 자신의 맵 타일의 타입을 변경합니다.
+    /// 이 함수로 타입을 변경 할 경우 애니메이터와 스프라이트 렌더러는 변경되지 않습니다.
+    /// </summary>
+    /// <param name="info"> 맵 타일 코드 </param>
+    public void SetCalculationSellType(MapSellInfo info)
+    {
+        SetSellType(info.typeCode, true);
+    }
+
+
 
     public MapSellType GetSellType()
     {
