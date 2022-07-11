@@ -7,7 +7,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
 {
     private MapSellType mapType;
     private IndexVector indexVector;
-    private bool isSquareOn = false;
+    private bool isOnSquare = false;
     private SquareCtrl onSquare;
     private SpriteRenderer spriteRenderer;
     private ObjectClicker clicker;
@@ -93,7 +93,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// <param name="square"> 상자 오브젝트 </param>
     public void SetOnSquare(bool isOn, SquareCtrl square = null)
     {
-        isSquareOn = isOn;
+        isOnSquare = isOn;
         onSquare = square;
 
         if (onSquare)
@@ -108,10 +108,18 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// </summary>
     public SquareCtrl GetOnSquare()
     {
-        if (isSquareOn && onSquare)
+        if (isOnSquare && onSquare)
             return onSquare;
         else
             return null;
+    }
+
+    /// <summary>
+    /// 자신의 위에 상자가 있는지 여부를 반환합니다.
+    /// </summary>
+    public bool IsOnSquare()
+    {
+        return isOnSquare;
     }
 
     /// <summary>
@@ -119,7 +127,7 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     /// </summary>
     public bool CanMoveThere()
     {
-        if (mapType.CanMove() && !isSquareOn)
+        if (mapType.CanMove() && !isOnSquare)
             return true;
         return false;
     }
@@ -211,13 +219,41 @@ public class MapSell : MonoBehaviour, DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
-        return SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, 
-                                       SaveManager.MapData.mapSellDataName, mapType.ToString());
+        return 
+            SaveManager.ConnectData(SaveManager.DataEndSign.endData,
+                SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd, 
+                                       SaveManager.MapData.mapSellDataName, mapType.ToString()),
+                SaveManager.ConnectData(SaveManager.DataEndSign.dataNameEnd,
+                                        SaveManager.MapData.onSquareDataName, isOnSquare.ToString()));
     }
 
     public void Load(string str)
     {
-        SetSellType(int.Parse(str));
+
+        string[] datas = str.SplitToString(SaveManager.DataEndSign.dataNameEnd);
+
+        for(int i = 0; i < datas.Length; i++)
+        {
+            if (datas[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
+            {
+
+                SetSellType(int.Parse(datas[1]));
+            }
+            else if(datas[0].CompareTo(SaveManager.MapData.onSquareDataName) == 0)
+            {
+                bool onSquare = bool.Parse(datas[1]);
+
+                if (onSquare)
+                {
+                    isOnSquare = true;
+                }
+                else
+                {
+                    isOnSquare = false;
+                }
+            }
+        }
+
     }
     #endregion
 }
