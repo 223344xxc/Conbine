@@ -107,8 +107,27 @@ public class MapManager : MonoBehaviour
         return GetMapElement(iv);
     }
 
+    /// <summary>
+    /// 맵 위에있는 상자들을 모두 다시배치 합니다.
+    /// 만약 상자가 있는지 여부에 오류가 생길경우 isOnSquar 변수의 값에 따라 상자를 배치합니다.
+    /// </summary>
+    public void RefreshMapOnSquare()
+    {
+        for (int y = 0; y < map.GetMapSize().y; y++)
+        {
+            for (int x = 0; x < map.GetMapSize().x; x++)
+            {
+                if (map.GetMapElement(x, y).IsOnSquare())
+                {
+                    SquareManager.instance.SummonSquare(x, y);
+                }
+            }
+        }
+    }
+
     public void LoadMap(string mapName)
     {
         map.Load(SaveManager.ReadText(FilePathManager.GetMapDataPath(mapName)));
+        RefreshMapOnSquare();
     }
 }
