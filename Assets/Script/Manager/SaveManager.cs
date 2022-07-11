@@ -14,6 +14,7 @@ public static class SaveManager
         public const string mapNameDataName = "MapName";
         public const string mapSizeDataName = "MapSize";
         public const string mapSellDataName = "MapSell";
+        public const string onSquareDataName = "OnSquare";
     }
 
     /// <summary>
@@ -24,6 +25,7 @@ public static class SaveManager
         public const string endLine = "\n";
         public const string dataNameEnd = ":";
         public const string endData = "/";
+        public const string connectedData = ",";
     }
 
 
