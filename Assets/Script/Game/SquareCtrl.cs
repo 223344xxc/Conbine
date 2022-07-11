@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-<<<<<<< Updated upstream
-using MapSellTypeOptions;
-=======
->>>>>>> Stashed changes
+
 
 public class SquareCtrl : MonoBehaviour
 {
@@ -26,16 +23,8 @@ public class SquareCtrl : MonoBehaviour
 
     private Animator anim;
 
-<<<<<<< Updated upstream
-
-    /// <summary>
-    /// 상자의 움직임이 끝났을 때 실행되는 이벤트 입니다.
-    /// </summary>
-    private Action trakingEndEvent;
-
-=======
     private Action trakingEndAction;
->>>>>>> Stashed changes
+
 
     private void Awake()
     {
@@ -48,7 +37,7 @@ public class SquareCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
 
 
-        SetTrakingEndEvent(() => { anim.SetTrigger("BlockStop"); });
+        SetTrakingEndAction(() => { anim.SetTrigger("BlockStop"); });
     }
 
     private void Start()
@@ -88,12 +77,9 @@ public class SquareCtrl : MonoBehaviour
     public void TrakingEnd()
     {
         isTrakingTarget = false;
-<<<<<<< Updated upstream
-        trakingEndEvent?.Invoke();
-=======
+
 
         trakingEndAction?.Invoke();
->>>>>>> Stashed changes
     }
 
     public void SetListIndex(int index)
@@ -165,33 +151,6 @@ public class SquareCtrl : MonoBehaviour
     }
 
     /// <summary>
-<<<<<<< Updated upstream
-    /// 상자가 정지했을 때 실행되는 이벤트를 설정합니다.
-    /// </summary>
-    /// <param name="action"></param>
-    public void SetTrakingEndEvent(Action action)
-    {
-        trakingEndEvent = action;
-    }
-
-    /// <summary>
-    /// 상자가 정지했을 때 실행되는 이벤트를 추가합니다.
-    /// </summary>
-    /// <param name="action"></param>
-    public void AddTrakingEndEvent(Action action)
-    {
-        trakingEndEvent += action;
-    }
-
-    public void SelectTrakingEndEvent(MapSellType sellType)
-    {
-        if (sellType.CompareCode(MapSellType.BLACKHOLE_SELL.typeCode))
-            SetTrakingEndEvent(() => { RemoveSquare(); });
-        else
-            SetTrakingEndEvent(() => { anim.SetTrigger("BlockStop"); });
-    }
-
-=======
     /// 상자의 움직임이 끝날때 실행될 이벤트를 설정합니다.
     /// </summary>
     public void SetTrakingEndAction(Action action)
@@ -226,8 +185,6 @@ public class SquareCtrl : MonoBehaviour
         anim.SetTrigger(triggerName);
     }
 
-
->>>>>>> Stashed changes
     /// <summary>
     /// 상자를 삭제합니다.
     /// </summary>
