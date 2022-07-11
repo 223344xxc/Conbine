@@ -1,32 +1,4 @@
 MapName:Map_1
-<<<<<<< Updated upstream
-MapSize:5/5
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:1
-MapSell:3
-MapSell:3
-MapSell:3
-MapSell:1
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:5
-MapSell:0
-MapSell:5
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-MapSell:0
-=======
 MapSize:5,5
 MapSell:0/OnSquare:True
 MapSell:0/OnSquare:True
@@ -53,5 +25,4 @@ MapSell:0/OnSquare:True
 MapSell:0/OnSquare:True
 MapSell:0/OnSquare:True
 MapSell:0/OnSquare:True
->>>>>>> Stashed changes
 
