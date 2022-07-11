@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MapSellTypeOptions;
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
 public enum MoveDirection
 {
     None,
@@ -73,6 +77,33 @@ public class SquareManager : MonoBehaviour
                 mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
                 mapMgr.SetOnSquare(ms.GetIndexVector(), true, square);
                 square.SetSquareMoveAngle(dir);
+
+                if (ms.GetSellType().CompareCode(MapSellType.BLACKHOLE_SELL))
+                {
+<<<<<<< Updated upstream
+                    mapMgr.GetMapElement(square.GetMapIndex()).SetOnSquare(false);
+
+                    mapMgr.GetMapElement(square.GetMapIndex()).SetCalculationSellType(MapSellType.NORMAL_SELL);
+                    square.SetTrakingEndEvent(() =>
+                    {
+                        mapMgr.GetMapElement(square.GetMapIndex()).RefreshSellType();
+                        square.RemoveSquare();
+                    });
+                }
+=======
+                    ms.SetOnSquare(false);
+                    ms.SetSellType(MapSellType.NORMAL_SELL);
+                    square.SetTrakingEndAction(() =>
+                    {
+                        square.SetAnimatorTrigger("DestroyToBlackHole");
+                       
+                    });
+                }
+                else
+                {
+                    square.ResetTrakingEndAction();
+                }
+>>>>>>> Stashed changes
             }
         }
     }

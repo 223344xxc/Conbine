@@ -85,9 +85,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.1
-    functionName: SetSellType
+    functionName: SetSellType_CallAnimation
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: ecb2b7140b5407d46ab3418bd6d59361, type: 3}
     floatParameter: 0
     intParameter: 3
     messageOptions: 0

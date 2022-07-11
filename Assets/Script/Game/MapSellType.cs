@@ -140,6 +140,16 @@ namespace MapSellTypeOptions {
             setStand(true).
             Build();
 
+        public static readonly MapSellInfo PROTAL_SELL =
+            new MapSellInfo.Builder().
+            setTypeCode(6).
+            setTypeName("Portal").
+            setSpriteName("MapSell_Default").
+            setAnimatorName("DefaultSellController").
+            setColor(Color.green).
+            setStand(true).
+            Build();
+
         #endregion
 
         public static readonly MapSellInfo[] MAP_SELL_INFO_ARRAY = {
@@ -149,6 +159,7 @@ namespace MapSellTypeOptions {
             LOCK_SELL,
             LOCK_OPEN_SELL,
             BLACKHOLE_SELL,
+            PROTAL_SELL,
         };
 
         public int sellTypeCode;

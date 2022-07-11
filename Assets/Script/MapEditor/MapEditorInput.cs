@@ -208,7 +208,8 @@ public class MapEditorInput : MonoBehaviour
 
         for(int i = 0; i < selectMapSell.Count; i++)
         {
-            selectMapSell[i].SetSellType(MapSellType.MAP_SELL_INFO_ARRAY[mapSellTypeDropDown.value].typeCode);
+            selectMapSell[i].SetSellType(MapSellType.MAP_SELL_INFO_ARRAY[mapSellTypeDropDown.value]);
+            "changeCall".LogError();
         }
 
     }
