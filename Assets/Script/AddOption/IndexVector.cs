@@ -116,12 +116,12 @@ public struct IndexVector : DataSaveInterface
     #region DataSaveInterface
     public string Save()
     {
-        return SaveManager.ConnectData(SaveManager.DataEndSign.connectedData, x.ToString(), y.ToString());
+        return SaveManager.ConnectData(SaveManager.DataEndSign.endData, x.ToString(), y.ToString());
     }
 
     public void Load(string str)
     {
-        string[] data = str.SplitToString(SaveManager.DataEndSign.connectedData);
+        string[] data = str.SplitToString(SaveManager.DataEndSign.endData);
         x = int.Parse(data[0]);
         y = int.Parse(data[1]);
     }

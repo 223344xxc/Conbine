@@ -167,38 +167,25 @@ public class Map : MonoBehaviour, DataSaveInterface
         int sellCount = 0;
         string[] fullData = str.SplitToString(SaveManager.DataEndSign.endLine);
 
-        for (int i = 0; i < fullData.Length; i++)
+        for(int i = 0; i < fullData.Length; i++)
         {
+            string[] dataLine = fullData[i].SplitToString(SaveManager.DataEndSign.dataNameEnd);
 
-            string[] dataNames = fullData[i].SplitToString(SaveManager.DataEndSign.endData);
-            for (int ii = 0; ii < dataNames.Length; ii++)
+            if (dataLine[0].CompareTo(SaveManager.MapData.mapNameDataName) == 0)
             {
-
-                string[] splitNameDatas = dataNames[ii].SplitToString(SaveManager.DataEndSign.dataNameEnd);
-
-                if (splitNameDatas[0].CompareTo(SaveManager.MapData.mapNameDataName) == 0)
-                {
-                    mapName = splitNameDatas[1];
-                }
-                else if (splitNameDatas[0].CompareTo(SaveManager.MapData.mapSizeDataName) == 0)
-                {
-                    mapSize.Load(splitNameDatas[1]);
-                    InitMap(mapSize);
-                }
-                else if (splitNameDatas[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
-                {
-                    GetMapElement(sellCount % mapSize.x, sellCount / mapSize.x).Load(dataNames[ii]);
-                   
-                }
-                else if (splitNameDatas[0].CompareTo(SaveManager.MapData.onSquareDataName) == 0) 
-                {
-                    GetMapElement(sellCount % mapSize.x, sellCount / mapSize.x).Load(dataNames[ii]);
-
-                    sellCount += 1;
-                }
+                mapName = dataLine[1];
+            }
+            else if(dataLine[0].CompareTo(SaveManager.MapData.mapSizeDataName) == 0)
+            {
+                mapSize.Load(dataLine[1]);
+                InitMap(mapSize);
+            }
+            else if(dataLine[0].CompareTo(SaveManager.MapData.mapSellDataName) == 0)
+            {
+                GetMapElement(sellCount % mapSize.x, sellCount / mapSize.x).Load(dataLine[1]);
+                sellCount += 1;
             }
         }
-
     }
     #endregion
 }
